@@ -1,6 +1,7 @@
 """Flask site for TacoHops app."""
 
 from flask import (Flask, session, render_template, request, flash, redirect)
+from os import environ
 # from model import ...
 
 #from jinja2 import...
@@ -8,3 +9,4 @@ from flask import (Flask, session, render_template, request, flash, redirect)
 app = Flask(__name__)
 app.secret_key = "TacosBeerTacosBeer"
 #app.jinja...
+print(environ.get('API_TOKEN'))

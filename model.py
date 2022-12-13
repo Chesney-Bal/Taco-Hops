@@ -26,7 +26,6 @@ class Brewery(db.Model):
     brewery_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
     brewery_name=db.Column(db.String(50))
-    # brewery_lat_long=db.Column(pass) ###CONFIRM DATATYPE#####
     brewery_address=db.Column(db.String(250))
     brewery_website=db.Column(db.String)
     brewery_image=db.Column(db.String)
@@ -43,7 +42,6 @@ class Tacoshop(db.Model):
     tacoshop_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
     tacoshop_name=db.Column(db.String(50))
-    # tacoshop_lat_long=db.Column(pass) ###CONFIRM DATATYPE#####
     tacoshop_address=db.Column(db.String(250))
     tacoshop_website=db.Column(db.String)
     tacoshop_image=db.Column(db.String)
