@@ -7,21 +7,20 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """A user."""
-    __tablename__ = "users"
+    __tablename__ ="users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String (25),nullable=False)
     email = db.Column(db.String (100), unique=True, nullable=False)
     password = db.Column(db.String(25), nullable=False)
 
     pairing=db.relationship("Pairing", back_populates="user")
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} user_name={self.user_name}>'
+        return f'<User user_id={self.user_id} user_email={self.user_email}>'
 
 class Brewery(db.Model):
     """A brewery."""
-    __tablename__ = "breweries"
+    __tablename__ ="breweries"
 
     brewery_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -37,7 +36,7 @@ class Brewery(db.Model):
 
 class Tacoshop(db.Model):
     """A Tacoshop."""
-    __tablename__ = "tacoshops"
+    __tablename__ ="tacoshops"
 
     tacoshop_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -53,7 +52,7 @@ class Tacoshop(db.Model):
 
 class Pairing(db.Model):
     """A pairing of a brewery and tacoshop"""
-    __tablename__= "pairings"
+    __tablename__="pairings"
 
     pairing_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -79,6 +78,4 @@ def connect_to_db(flask_app):
 
 if __name__=="__main__":
     from server import app
-
-
-connect_to_db(app)
+    connect_to_db(app)
