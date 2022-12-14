@@ -16,7 +16,7 @@ class User(db.Model):
     pairing=db.relationship("Pairing", back_populates="user")
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} user_email={self.user_email}>'
+        return f'<User user_id={self.user_id} email={self.email}>'
 
 class Brewery(db.Model):
     """A brewery."""
@@ -67,9 +67,11 @@ class Pairing(db.Model):
         return f'<Pairing pairing_id={self.pairing_id} tacoshop_id={self.tacoshop_id} brewery_id={self.brewery_id}>'  
 
 
-def connect_to_db(flask_app):
-    pass
-    # flask_app.config["pass"] = pass
+def connect_to_db(flask_app, db_uri="postgresql:///users", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
     db.app=flask_app
     db.init_app(flask_app)

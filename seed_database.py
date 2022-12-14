@@ -1,9 +1,7 @@
 """Script to seed database."""
 
 import os
-import json
 from random import choice, randint
-
 
 import crud
 import model
