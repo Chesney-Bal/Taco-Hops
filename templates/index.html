@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Age{% endblock %}
+
+{% block body %}
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-8">
+      <h1>Get Ready to Taco Hop!!</h1>
+
+      <h2> But First...An AGE-old Question!</h2>
+
+      <h3> Are you of legal drinking age?</h3>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+        <label for="DOB">Enter your birthdate:</label>
+          <form>
+              <input type="date" name="user_DOB" max ="2021-12-14" step="1" >
+              
+              <button type ="submit">I'm of age!</button>
+          </form>
+    </div>
+
+  </div>
+  
+{% endblock %}
