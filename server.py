@@ -23,21 +23,34 @@ def verify_age_page():
     #if DOB is less than 21 years ago reroute to goodbye page
     #if DOB is 21 years or older reroute to homepage
     
-
     return render_template('index.html')
+
+@app.route('/', methods=['POST'])
+def verify_age():
+    #TODO:
+    #user input-Date
+        # #if the date < 21 years ago
+        #     redirect ('/goodbye')
+        # else:
+            session['is of age']=True
+            return redirect('/homepage')
 
 #homepage that gives option to log in or create account
 
-# @app.route('/homepage')
-# def homepage():
+@app.route('/homepage')
+def homepage():
 #     #button/form option to log-in for exisiting users
 #         #do i need a listening event for submit button?
 #     #button/form option to create a new account
 #         #do i need a listening event for submit button?
 #     #?do I want a non-log-in option to just go to search page?
+    old_enough=session.get('is of age', False)
+    print(old_enough)
+    if old_enough is False:
+        return redirect('/goodbye')
+        #TODO:make goodbye route
 
-#     #not sure if this is the correct return statement
-#     return redirect('/homepage')
+    return render_template('homepage.html')
     
 
 #users can log in with their account credentials
