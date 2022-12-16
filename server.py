@@ -2,6 +2,7 @@
 
 from flask import (Flask, session, render_template, request, flash, redirect)
 from os import environ
+from datetime import date, datetime
 
 from model import connect_to_db, db
 import crud
@@ -15,40 +16,36 @@ print(environ.get('API_TOKEN'))
 
 #create routes and view functions
 
-#index page verify user age to access website
+
 @app.route('/')
 def verify_age_page():
-    """returns index page and verifies user's age"""
-    #html form should veriyf that DOB is 21 years ago
-    #if DOB is less than 21 years ago reroute to goodbye page
-    #if DOB is 21 years or older reroute to homepage
-    
+    """returns index page and collects DOB of user"""
+
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
 def verify_age():
-    #TODO:
-    #user input-Date
-        # #if the date < 21 years ago
-        #     redirect ('/goodbye')
-        # else:
-            session['is of age']=True
-            return redirect('/homepage')
+    """takes users DOB and verifies if they are 21 or over"""
+    birthDate=request.form['birthDate']
+    birthDate_object=datetime.strptime(birthDate, '%Y-%m-%d').date()
+
+    #verifies age and only lets 21 and over get to homepage.html
+    if crud.are_you_21(birthDate_object) is True:
+        session['is of age']=True
+        return redirect('/homepage')
+
+    #if not 21- user gets redirected to goodbye page
+    return redirect('/goodbye')
+
 
 #homepage that gives option to log in or create account
-
 @app.route('/homepage')
 def homepage():
-#     #button/form option to log-in for exisiting users
-#         #do i need a listening event for submit button?
-#     #button/form option to create a new account
-#         #do i need a listening event for submit button?
-#     #?do I want a non-log-in option to just go to search page?
+    """Ensures that age remains in session to block out anyone not of age"""
     old_enough=session.get('is of age', False)
-    print(old_enough)
+
     if old_enough is False:
         return redirect('/goodbye')
-        #TODO:make goodbye route
 
     return render_template('homepage.html')
     
@@ -65,12 +62,13 @@ def login_user():
 
     if not user or user.password != password:
         flash("The email or password you entered was incorrect.")
+        return redirect ('/homepage')
     else:
         # Log in user by storing the user's email in session
-        session["email"] = user.email
+        session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
+        return redirect ('/search_by_brewery')
 
-    return redirect ("/search_by_brewery")
 
 #users can create an account with email and password
 @app.route('/create_new_user', methods =["POST"])
@@ -86,13 +84,14 @@ def create_new_user():
 
     if user:
         flash("Email already in use. Try again.")
+        return redirect ('/homepage')
     else:
         user = crud.create_user(email, password)
         db.session.add(user)
         db.session.commit()
         flash("Account created successfully. Please log in.")
+        return redirect("/homepage") 
 
-    return redirect("/homepage") 
 
 #search page - user can view a map and start a search for a brewery
 @app.route('/search_by_brewery')
@@ -108,6 +107,12 @@ def search_brewery():
 
     #user can click on brewery name and get...(Yelp page?)
 
+
+@app.route('/goodbye')
+def goodbye_page():
+    """Displays Goodbye page"""
+
+    return render_template('goodbye.html')
 
 if __name__ == '__main__':
     connect_to_db(app)

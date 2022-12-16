@@ -3,8 +3,18 @@
 {% block title %}Search By Brewery{% endblock %}
 
 {% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+    {{message}}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
 <h1> Brewery Search</h1>
 <h2> To get started search for 'Brewery' in a desired location!</h2>
+
+
 
 <div class="row">
 
