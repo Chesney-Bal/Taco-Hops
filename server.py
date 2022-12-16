@@ -115,9 +115,22 @@ def search_for_brewery():
     # unit = request.args.get('unit', '')
 
     url ='https://api.yelp.com/v3/businesses/search' 
-    # headers = { 'Bearer' ; API_KEY }
-    # r=requests.get(url, headers=headers)
-    # r.json()
+    payload ={'apikey': API_KEY,
+                'term': term,
+                'location': location,
+                'radius': radius
+    }
+
+    response = requests.get(url, params=payload)
+    data=response.json
+
+    #modeled after server.py from apis excercise- reference to continue code- left off after above response/data lines
+    header = {'Authorization: Bearer',API_KEY}
+    # header2= {'accept: application/json'}
+    r=requests.get(url,header=header)
+    r.json()
+
+    return render_template('search-results.html',)
     
     # res = requests.get(url)
     # r=requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params ={'term':'', 'location':'', 'radius': ''})
