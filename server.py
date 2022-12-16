@@ -12,7 +12,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
-print(environ.get('API_TOKEN'))
+environ.get('API_TOKEN')
 
 #create routes and view functions
 
@@ -22,6 +22,7 @@ def verify_age_page():
     """returns index page and collects DOB of user"""
 
     return render_template('index.html')
+
 
 @app.route('/', methods=['POST'])
 def verify_age():
@@ -67,7 +68,7 @@ def login_user():
         # Log in user by storing the user's email in session
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
-        return redirect ('/search_by_brewery')
+        return redirect ('/brewery_trip_planner')
 
 
 #users can create an account with email and password
@@ -94,12 +95,25 @@ def create_new_user():
 
 
 #search page - user can view a map and start a search for a brewery
-@app.route('/search_by_brewery')
-def search_brewery():
-    """Returns page to search for brewery"""
+@app.route('/brewery_trip_planner')
+def trip_planner():
+    """Returns page to plan brewery and taco trip"""
 
-    return render_template('search_by_brewery.html')
+    return render_template('brewery_trip_planner.html')
 
+
+@app.route('/brewery_trip_planner/search')
+def search_for_brewery():
+    "Search for brewery through Yelp"
+
+    keyword = request.args.get('keyword', '')
+    location = request.args.get('location', '')
+    radius = request.args.get('radius', '')
+    unit = request.args.get('unit', '')
+
+    url ='https://api.yelp.com/v3/business/search' 
+
+    API = {'API_TOKEN': API_TOKEN}
 
 
 #another page or view route?

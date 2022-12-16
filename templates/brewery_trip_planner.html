@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Search By Brewery{% endblock %}
+
+{% block body %}
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        {{message}}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+<div class="container">
+  <div class="row">
+    <div class ="column">
+      <h2> Plan your Taco Hop</h2>
+
+      <form method="GET" action="/brewery_trip_planner/search">
+        <div class ="row">
+          <label class="form-label above" for="search-keyword">Search Keyword</label>
+
+          <input
+            id="search-keyword"
+            class="form-control"
+            type="text"
+            name="keyword"
+            >
+        </div>
+
+        <div class="row">
+          <label class="form-lavel above" for="search-zip">Zip Code</label>
+
+          <input
+            id="search-zip"
+            class="form-control"
+            type ="text"
+            name="location"
+            >
+        </div>
+
+        <div class="row">
+          <label class="form-label above" for="search-radius">Distance Radius</label>
+           <div class="col-8">
+            <input
+            id="search-radius"
+            class="form-control"
+            type="number"
+            name="radius"
+            >
+           </div>
+
+        <div class="col-3 offset-1">
+          <select class="form-control form-select" name="unit">
+            <option value="miles">miles</option>
+            <option value="km">kilometers</option>
+          </select>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-3">
+            <input type="submit" value="Brewery Search" class="btn btn-primary">
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+</div>
+
+{% endblock %}
