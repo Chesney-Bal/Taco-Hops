@@ -3,16 +3,19 @@
 from flask import (Flask, session, render_template, request, flash, redirect)
 from os import environ
 from datetime import date, datetime
+import requests
 
 from model import connect_to_db, db
 import crud
+
+
 
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
-environ.get('API_TOKEN')
+API_KEY=environ.get('API_TOKEN')
 
 #create routes and view functions
 
@@ -106,14 +109,22 @@ def trip_planner():
 def search_for_brewery():
     "Search for brewery through Yelp"
 
-    keyword = request.args.get('keyword', '')
+    term = request.args.get('term', 'brewery')
     location = request.args.get('location', '')
     radius = request.args.get('radius', '')
-    unit = request.args.get('unit', '')
+    # unit = request.args.get('unit', '')
 
-    url ='https://api.yelp.com/v3/business/search' 
+    url ='https://api.yelp.com/v3/businesses/search' 
+    # headers = { 'Bearer' ; API_KEY }
+    # r=requests.get(url, headers=headers)
+    # r.json()
+    
+    # res = requests.get(url)
+    # r=requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params ={'term':'', 'location':'', 'radius': ''})
 
-    API = {'API_TOKEN': API_TOKEN}
+
+#helper function
+
 
 
 #another page or view route?

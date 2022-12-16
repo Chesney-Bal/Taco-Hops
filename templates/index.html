@@ -3,26 +3,38 @@
 {% block title %}Verify Age{% endblock %}
 
 {% block body %}
+  <div class="container">
 
-  <div class="row">
-
-    <div class="col-xs-12 col-md-8">
-      <h1>Get Ready to Taco Hop!!</h1>
-
-      <h2> But First...An AGE-old Question!</h2>
-
-      <h3> Are you of legal drinking age?</h3>
+    <div class="row">
+      <div class="col-3"></div>
+        <div class ="col-6">
+          <h1>Get Ready to Taco Hop!!</h1>
+        </div>
+     <div class="col-9"></div>
     </div>
 
-    <div class="col-xs-12 col-md-4">
+    <div class="row">
+        <div class="col-5">
+          <h2> But First...An AGE-old Question!</h2>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-7">
+        <h3> Are you of legal drinking age?</h3>
+      </div>
+      
+      <div class="col-4">
         <label for="DOB">Enter your birthdate:</label>
           <form action="/" method="post">
               <input type="date" name="birthDate" >
-              
               <button type ="submit">I'm of age!</button>
           </form>
+      </div>
     </div>
 
   </div>
-  
 {% endblock %}
+
+
+

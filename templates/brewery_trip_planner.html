@@ -19,21 +19,23 @@
 
       <form method="GET" action="/brewery_trip_planner/search">
         <div class ="row">
-          <label class="form-label above" for="search-keyword">Search Keyword</label>
+          <label class="form-label above" for="search-term">Search Keyword</label>
+          <small class="form-text text-muted">Example: Brewery</small>
 
           <input
-            id="search-keyword"
+            id="search-term"
             class="form-control"
             type="text"
-            name="keyword"
+            name="term"
             >
         </div>
 
         <div class="row">
-          <label class="form-lavel above" for="search-zip">Zip Code</label>
+          <label class="form-label above" for="search-location">Location</label>
+          <small class="form-text text-muted"> Search by neighborhood/state (North Park, Ca), zip code (92109) or city (San Diego).</small>
 
           <input
-            id="search-zip"
+            id="search-location"
             class="form-control"
             type ="text"
             name="location"
@@ -51,12 +53,12 @@
             >
            </div>
 
-        <div class="col-3 offset-1">
+        <!-- <div class="col-3 offset-1">
           <select class="form-control form-select" name="unit">
             <option value="miles">miles</option>
             <option value="km">kilometers</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="row mt-4">
           <div class="col-3">
