@@ -3,6 +3,7 @@
 from flask import (Flask, session, render_template, request, flash, redirect)
 from os import environ
 from datetime import date, datetime
+from pprint import pformat
 import requests
 
 from model import connect_to_db, db
@@ -112,7 +113,7 @@ def search_for_brewery():
     term = request.args.get('term', 'brewery')
     location = request.args.get('location', '')
     radius = request.args.get('radius', '')
-    # unit = request.args.get('unit', '')
+
 
     url ='https://api.yelp.com/v3/businesses/search' 
     payload ={'apikey': API_KEY,
@@ -122,15 +123,32 @@ def search_for_brewery():
     }
 
     response = requests.get(url, params=payload)
-    data=response.json
+    brewery_results=response.json
+
+    print(brewery_results)
+    # if 'embedded' in data:
+    #     search=data['_embedded']['search']
+    # else:
+    #     search = []
+    
+    #example renders another template wiht the results in that template. #
+    # Consider doing that or consider a fetch to return results on front end so you don't have to reload browser
+    #or consider returning results on the brewery_trip_planner.html ideally  below the embedded map
+    #example from api exercise: # html by that name exists yet-#pformat in said html in jinja in api example {{pformat(data)}}
+    #pformat is imported from pprint
+    return redirect("/brewery_search_results")
+    # return render_template ('search-results.html',
+    #                     pformat=pformat,
+    #                     data=data,
+    #                     results=search)
 
     #modeled after server.py from apis excercise- reference to continue code- left off after above response/data lines
-    header = {'Authorization: Bearer',API_KEY}
-    # header2= {'accept: application/json'}
-    r=requests.get(url,header=header)
-    r.json()
+    # header = {'Authorization: Bearer',API_KEY}
+    # # header2= {'accept: application/json'}
+    # r=requests.get(url,header=header)
+    # r.json()
 
-    return render_template('search-results.html',)
+    # return render_template('search-results.html',)
     
     # res = requests.get(url)
     # r=requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params ={'term':'', 'location':'', 'radius': ''})
@@ -144,6 +162,19 @@ def search_for_brewery():
     #search returns- brewery with list of tacoshops near by
 
     #user can click on brewery name and get...(Yelp page?)
+
+
+#results page - user can view a map and results from search
+@app.route('/brewery_search_results')
+def search_results():
+    """Returns page with brewery search results"""
+
+    return render_template('brewery_search_results.html')
+
+@app.route('/brewery_search_results/results')
+def display_results():
+    """Displays the results from the search"""
+    #TODO: display the results of the YELP API search and coordainte with map
 
 
 @app.route('/goodbye')

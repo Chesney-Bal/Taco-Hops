@@ -19,27 +19,26 @@
 
       <form method="GET" action="/brewery_trip_planner/search">
         <div class ="row">
-          <label class="form-label above" for="search-term">Search Keyword</label>
-          <small class="form-text text-muted">Example: Brewery</small>
-
-          <input
-            id="search-term"
-            class="form-control"
-            type="text"
-            name="term"
-            >
-        </div>
-
-        <div class="row">
-          <label class="form-label above" for="search-location">Location</label>
-          <small class="form-text text-muted"> Search by neighborhood/state (North Park, Ca), zip code (92109) or city (San Diego).</small>
-
-          <input
-            id="search-location"
-            class="form-control"
-            type ="text"
-            name="location"
-            >
+          <div class="col-6">
+            <label class="form-label above" for="search-term">Search Keyword</label>
+              <small class="form-text text-muted">Example: Brewery</small>
+                <input
+                  id="search-term"
+                  class="form-control"
+                  type="text"
+                  name="term"
+                  >      
+          </div>
+          <div class="col-6">
+            <label class="form-label above" for="search-location">Location</label>
+              <small class="form-text text-muted"> Search by neighborhood/state (North Park, Ca), zip code (92109) or city (San Diego).</small>
+                <input
+                  id="search-location"
+                  class="form-control"
+                  type ="text"
+                  name="location"
+                  >
+          </div>
         </div>
 
         <div class="row">
@@ -53,13 +52,6 @@
             >
            </div>
 
-        <!-- <div class="col-3 offset-1">
-          <select class="form-control form-select" name="unit">
-            <option value="miles">miles</option>
-            <option value="km">kilometers</option>
-          </select>
-        </div> -->
-
         <div class="row mt-4">
           <div class="col-3">
             <input type="submit" value="Brewery Search" class="btn btn-primary">
@@ -71,13 +63,36 @@
   </div>
 </div>
 
-
-
-
-
-
-<div class="row">
-
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <iframe 
+        width="600" 
+        height="450" 
+        style="border:0" 
+        loading="lazy" 
+        allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=brewery&key=AIzaSyA49IdQHfRJYarkQK570BdIb3n3K5KuxRU">
+      </iframe>
+    </div>
+  </div>
 </div>
+
+
+<!-- <iframe 
+width="600" 
+height="450" 
+style="border:0" 
+loading="lazy" 
+allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=brewery&key=AIzaSyA49IdQHfRJYarkQK570BdIb3n3K5KuxRU">
+</iframe> -->
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="column">
+      <img src="/static/img/San Diego Map.png" alt="San Diego Map image">
+    </div>
+  </div>
+</div> -->
+
 
 {% endblock %}
