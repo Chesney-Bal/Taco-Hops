@@ -5,6 +5,7 @@ from os import environ
 from datetime import date, datetime
 from pprint import pformat
 import requests
+import json
 
 from model import connect_to_db, db
 import crud
@@ -116,52 +117,30 @@ def search_for_brewery():
 
 
     url ='https://api.yelp.com/v3/businesses/search' 
-    payload ={'apikey': API_KEY,
-                'term': term,
+    headers = {'Authorization': 'Bearer '+API_KEY
+
+    }
+    payload ={  'term': term,
                 'location': location,
                 'radius': radius
     }
 
-    response = requests.get(url, params=payload)
-    brewery_results=response.json
+    response = requests.get(url, headers=headers, params=payload)
+    brewery_results=response.json()
+  
+    for brewery in brewery_results:
+        brewery_name=brewery_results['name']
+        brewery_image=brewery_results['image_url']
+        brewery_closed=brewery_results['is_closed']
+        brewery_yelp_url=brewery_results['url']
+        brewery_long_lat=brewery_results['coordinates']
+        brewery_address=brewery_results["location['display_address']"]
 
-    print(brewery_results)
-    # if 'embedded' in data:
-    #     search=data['_embedded']['search']
-    # else:
-    #     search = []
+
+    # print(f'Attempt to access Yelp API: {brewery_results}')
     
-    #example renders another template wiht the results in that template. #
-    # Consider doing that or consider a fetch to return results on front end so you don't have to reload browser
-    #or consider returning results on the brewery_trip_planner.html ideally  below the embedded map
-    #example from api exercise: # html by that name exists yet-#pformat in said html in jinja in api example {{pformat(data)}}
-    #pformat is imported from pprint
-    return redirect("/brewery_search_results")
-    # return render_template ('search-results.html',
-    #                     pformat=pformat,
-    #                     data=data,
-    #                     results=search)
-
-    #modeled after server.py from apis excercise- reference to continue code- left off after above response/data lines
-    # header = {'Authorization: Bearer',API_KEY}
-    # # header2= {'accept: application/json'}
-    # r=requests.get(url,header=header)
-    # r.json()
-
-    # return render_template('search-results.html',)
-    
-    # res = requests.get(url)
-    # r=requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params ={'term':'', 'location':'', 'radius': ''})
-
-
-#helper function
-
-
-
-#another page or view route?
-    #search returns- brewery with list of tacoshops near by
-
-    #user can click on brewery name and get...(Yelp page?)
+###this variables? are throwing an erroras syntax error- how do I take the dict results and transfer them into Jinja? Also not showing up in html being rendered
+    return render_template("brewery_search_results.html", brewery, brewery_name=brewery_name, brewery_image=brewery_image, brewery_closed=brewery_closed, brewery_yelp_url=brewery_yelp_url, brewery_yelp_url=brewery_long_lat, brewery_address=brewery_address)
 
 
 #results page - user can view a map and results from search
@@ -175,6 +154,12 @@ def search_results():
 def display_results():
     """Displays the results from the search"""
     #TODO: display the results of the YELP API search and coordainte with map
+
+
+#another page or view route?
+    #search returns- brewery with list of tacoshops near by
+
+    #user can click on brewery name and get...(Yelp page?)
 
 
 @app.route('/goodbye')
