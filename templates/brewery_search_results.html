@@ -8,6 +8,7 @@
   <h2>Taco Hop Brewery Search Results:</h2>
 
   {% for brewery in breweries %}
+  <div class="coordinates" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}">
     <div class="row">
       <div class="col-6">
         <ul class="brewery-results"></ul>
@@ -24,56 +25,23 @@
 
     <div class="row">
       <div class="column">    
-        <p>See What Taco Shops are nearby: <a href="/taco" target="_blank">
-          {{brewery['location']['display_address']}}</a> </p>
+        <p>See What Taco Shops are nearby: 
+          <a href="/taco" target="_blank" >
+          {{brewery['location']['display_address']}}
+          
+        </a> 
+      </p>
       </div>
     </div>
+  </div>
+
 
   {% endfor %}
 
 </div>
 
-
-
-<div class="container">
-    <div class="row">
-      <div class="col-6">
-        <h2>Taco Hop Brewery Search Results:</h2>
-        <ul class="brewery-search">
-          {% for brewery in breweries %}
-          <li><a href="{{brewery['url']}}" target="_blank">
-            {{brewery['name']}} </a></li>
-            <p>See What Taco Shops are nearby: <a href="/taco" target="_blank">
-              {{brewery['location']['display_address']}}</a> </p>
-          <img src="{{brewery['image_url']}}" width="200">
-          {% endfor %}
-        </ul>
-      </div>
-      
-    </div>
-  </div>
-
+<script src="/static/js/brewery_taco.js">
   
-  <div class="col-6">
-    <h2>Your Mapped Results:</h2>
-      <iframe 
-        width="600" 
-        height="450" 
-        style="border:0" 
-        loading="lazy" 
-        allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=brewery&key=AIzaSyA49IdQHfRJYarkQK570BdIb3n3K5KuxRU">
-      </iframe>
-  </div>
-
-
-
-
-<!-- <div class="container">
-    <div class="row">
-      <div class="column">
-        <img src="/static/img/San Diego Map.png" alt="San Diego Map image">
-      </div>
-    </div>
-  </div> -->
+</script>
 
 {% endblock %}

@@ -125,10 +125,63 @@ def search_for_brewery():
     brewery_results=response.json()
     breweries=brewery_results['businesses']
 
+    return render_template("brewery_search_results.html", breweries=breweries)
 
 
+#results page - user can view a map and results from search
+@app.route('/brewery_search_results')
+def search_results():
+    """Returns page with brewery search results"""
 
-# {
+    return render_template('brewery_search_results.html')
+
+#another page or view route?
+    #search returns- brewery with list of tacoshops near by
+
+    #user can click on brewery name and get...(Yelp page?)
+    
+@app.route('/taco',methods=["POST"])
+def dispaly_tacoshops():
+    lat=request.json.get("lat")
+    long=request.json.get("long")
+
+# @app.route('/taco')
+# def tacoshops_nearby():
+    
+    #location should be the location of the selected brewery
+    # location = request.args.get('location', '')
+#currently hard coded San Diego in as a location and taocshops.html returns a list of taco shops in san diego.
+#would like to figure out how to pass in the location from the other search
+
+    url ='https://api.yelp.com/v3/businesses/search' 
+    headers = {'Authorization': 'Bearer '+API_KEY
+    }
+    
+    payload ={  'term': 'taco shop',
+                'longitude': long,
+                'latitude': lat
+    }
+
+    response = requests.get(url, headers=headers, params=payload)
+    tacoshop_results=response.json()
+    tacoshops=tacoshop_results['businesses']
+
+    return render_template('tacoshops_nearby.html', tacoshops=tacoshops)
+
+
+@app.route('/goodbye')
+def goodbye_page():
+    """Displays Goodbye page"""
+
+    return render_template('goodbye.html')
+
+if __name__ == '__main__':
+    connect_to_db(app)
+    app.run(host="0.0.0.0", debug=True)
+
+
+    ##example of returned infor from yelp api
+    # {
 #   "businesses": [
 #     {
 #       "alias": "golden-boy-pizza-hamburg",
@@ -185,53 +238,3 @@ def search_for_brewery():
 #   },
 #   "total": 6800
 # }
-
-    return render_template("brewery_search_results.html", breweries=breweries)
-
-
-#results page - user can view a map and results from search
-@app.route('/brewery_search_results')
-def search_results():
-    """Returns page with brewery search results"""
-
-    return render_template('brewery_search_results.html')
-
-#another page or view route?
-    #search returns- brewery with list of tacoshops near by
-
-    #user can click on brewery name and get...(Yelp page?)
-
-
-@app.route('/taco')
-def tacoshops_nearby():
-    
-    #location should be the location of the selected brewery
-    # location = request.args.get('location', '')
-#currently hard coded San Diego in as a location and taocshops.html returns a list of taco shops in san diego.
-#would like to figure out how to pass in the location from the other search
-
-
-    url ='https://api.yelp.com/v3/businesses/search' 
-    headers = {'Authorization': 'Bearer '+API_KEY
-    }
-    
-    payload ={  'term': 'taco shop',
-                'location': 'San Diego'
-    }
-
-    response = requests.get(url, headers=headers, params=payload)
-    tacoshop_results=response.json()
-    tacoshops=tacoshop_results['businesses']
-
-    return render_template('tacoshops_nearby.html', tacoshops=tacoshops)
-
-
-@app.route('/goodbye')
-def goodbye_page():
-    """Displays Goodbye page"""
-
-    return render_template('goodbye.html')
-
-if __name__ == '__main__':
-    connect_to_db(app)
-    app.run(host="0.0.0.0", debug=True)
