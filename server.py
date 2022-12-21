@@ -111,36 +111,82 @@ def trip_planner():
 def search_for_brewery():
     "Search for brewery through Yelp"
 
-    term = request.args.get('term', 'brewery')
     location = request.args.get('location', '')
-    radius = request.args.get('radius', '')
-
 
     url ='https://api.yelp.com/v3/businesses/search' 
     headers = {'Authorization': 'Bearer '+API_KEY
-
     }
-    payload ={  'term': term,
-                'location': location,
-                'radius': radius
+    
+    payload ={  'term': 'brewery',
+                'location': location
     }
 
     response = requests.get(url, headers=headers, params=payload)
     brewery_results=response.json()
-  
-    for brewery in brewery_results:
-        brewery_name=brewery_results['name']
-        brewery_image=brewery_results['image_url']
-        brewery_closed=brewery_results['is_closed']
-        brewery_yelp_url=brewery_results['url']
-        brewery_long_lat=brewery_results['coordinates']
-        brewery_address=brewery_results["location['display_address']"]
+    breweries=brewery_results['businesses']
 
 
-    # print(f'Attempt to access Yelp API: {brewery_results}')
-    
-###this variables? are throwing an erroras syntax error- how do I take the dict results and transfer them into Jinja? Also not showing up in html being rendered
-    return render_template("brewery_search_results.html", brewery, brewery_name=brewery_name, brewery_image=brewery_image, brewery_closed=brewery_closed, brewery_yelp_url=brewery_yelp_url, brewery_yelp_url=brewery_long_lat, brewery_address=brewery_address)
+
+
+# {
+#   "businesses": [
+#     {
+#       "alias": "golden-boy-pizza-hamburg",
+#       "categories": [
+#         {
+#           "alias": "pizza",
+#           "title": "Pizza"
+#         },
+#         {
+#           "alias": "food",
+#           "title": "Food"
+#         }
+#       ],
+#       "coordinates": {
+#         "latitude": 41.7873382568359,
+#         "longitude": -123.051551818848
+#       },
+#       "display_phone": "(415) 982-9738",
+#       "distance": 4992.437696561071,
+#       "id": "QPOI0dYeAl3U8iPM_IYWnA",
+#       "image_url": "https://yelp-photos.yelpcorp.com/bphoto/b0mx7p6x9Z1ivb8yzaU3dg/o.jpg",
+#       "is_closed": true,
+#       "location": {
+#         "address1": "Herr",
+#         "address2": "Wesselstraat",
+#         "address3": "68c",
+#         "city": "Hamburg",
+#         "country": "US",
+#         "display_address": [
+#           "Herr",
+#           "Wesselstraat",
+#           "68c",
+#           "Hamburg, CA 22399"
+#         ],
+#         "state": "CA",
+#         "zip_code": "22399"
+#       },
+#       "name": "Golden Boy Pizza",
+#       "phone": "+14159829738",
+#       "price": "$",
+#       "rating": 4,
+#       "review_count": 903,
+#       "transactions": [
+#         "restaurant_reservation"
+#       ],
+#       "url": "https://www.yelp.com/biz/golden-boy-pizza-hamburg?adjust_creative=XsIsNkqpLmHqfJ51zfRn3A&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=XsIsNkqpLmHqfJ51zfRn3A"
+#     }
+#   ],
+#   "region": {
+#     "center": {
+#       "latitude": 37.76089938976322,
+#       "longitude": -122.43644714355469
+#     }
+#   },
+#   "total": 6800
+# }
+
+    return render_template("brewery_search_results.html", breweries=breweries)
 
 
 #results page - user can view a map and results from search
@@ -150,16 +196,34 @@ def search_results():
 
     return render_template('brewery_search_results.html')
 
-@app.route('/brewery_search_results/results')
-def display_results():
-    """Displays the results from the search"""
-    #TODO: display the results of the YELP API search and coordainte with map
-
-
 #another page or view route?
     #search returns- brewery with list of tacoshops near by
 
     #user can click on brewery name and get...(Yelp page?)
+
+
+@app.route('/taco')
+def tacoshops_nearby():
+    
+    #location should be the location of the selected brewery
+    # location = request.args.get('location', '')
+#currently hard coded San Diego in as a location and taocshops.html returns a list of taco shops in san diego.
+#would like to figure out how to pass in the location from the other search
+
+
+    url ='https://api.yelp.com/v3/businesses/search' 
+    headers = {'Authorization': 'Bearer '+API_KEY
+    }
+    
+    payload ={  'term': 'taco shop',
+                'location': 'San Diego'
+    }
+
+    response = requests.get(url, headers=headers, params=payload)
+    tacoshop_results=response.json()
+    tacoshops=tacoshop_results['businesses']
+
+    return render_template('tacoshops_nearby.html', tacoshops=tacoshops)
 
 
 @app.route('/goodbye')

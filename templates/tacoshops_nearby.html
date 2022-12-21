@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Nearby TacoShops{% endblock %}
+
+{% block body %} 
+
+<div class="container">
+    <div class="row">
+      <div class="column">
+        <h2> Taco Results</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <h2> Taco Shps nearby:</h2>
+        <ul class="tacoshop-search">
+        {% for tacoshop in tacoshops%}
+        <li><a href="{{tacoshop['url']}}" target="_blank">
+            {{tacoshop['name']}} </a></li>
+          <address>{{tacoshop['location']['display_address']}}</address>
+          <img src="{{tacoshop['image_url']}}" width="200">
+          {% endfor %}
+        </ul>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+             <h4>Something goes here</h4>
+          </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <h2>Your Search Results:</h2>
+        <ul class="taco-search">
+            taoc shop results goes here
+        </ul>
+      </div>
+      <div class="col-6">
+        <h2>Your Mapped Results:</h2>
+          
+      </div>
+    </div>
+  </div>
+  {% endblock %}
