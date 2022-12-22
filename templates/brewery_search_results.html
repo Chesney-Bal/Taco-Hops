@@ -26,22 +26,14 @@
     <div class="row">
       <div class="column">    
         <p>See What Taco Shops are nearby: 
-          <a href="/taco" target="_blank" >
-          {{brewery['location']['display_address']}}
-          
-        </a> 
-      </p>
+          <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}" target="_blank" method="post" >
+            {{brewery['location']['display_address']}}
+          </a> 
+        </p>
       </div>
     </div>
   </div>
-
-
   {% endfor %}
 
 </div>
-
-<script src="/static/js/brewery_taco.js">
-  
-</script>
-
 {% endblock %}

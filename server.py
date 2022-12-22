@@ -19,8 +19,6 @@ app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
 API_KEY=environ.get('API_TOKEN')
 
-#create routes and view functions
-
 
 @app.route('/')
 def verify_age_page():
@@ -128,30 +126,10 @@ def search_for_brewery():
     return render_template("brewery_search_results.html", breweries=breweries)
 
 
-#results page - user can view a map and results from search
-@app.route('/brewery_search_results')
-def search_results():
-    """Returns page with brewery search results"""
-
-    return render_template('brewery_search_results.html')
-
-#another page or view route?
-    #search returns- brewery with list of tacoshops near by
-
-    #user can click on brewery name and get...(Yelp page?)
-    
-@app.route('/taco',methods=["POST"])
-def dispaly_tacoshops():
-    lat=request.json.get("lat")
-    long=request.json.get("long")
-
-# @app.route('/taco')
-# def tacoshops_nearby():
-    
-    #location should be the location of the selected brewery
-    # location = request.args.get('location', '')
-#currently hard coded San Diego in as a location and taocshops.html returns a list of taco shops in san diego.
-#would like to figure out how to pass in the location from the other search
+@app.route('/taco')
+def tacoshops_nearby():
+    lat=request.args.get("lat")
+    long=request.args.get("long")
 
     url ='https://api.yelp.com/v3/businesses/search' 
     headers = {'Authorization': 'Bearer '+API_KEY
