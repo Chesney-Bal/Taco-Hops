@@ -4,35 +4,49 @@
 
 {% block body %}
 
+<div id="map" height="500px" width="500px"></div>
 
-<div class="container">
-   <div class="row">
-        <div class="col-6">
-            <h2>Taco Hop Brewery Search Results:</h2>
-            <ul class="brewery-results"></ul>
-            <li>Brewery 1 with address, pic and img</li>
-            <li>Brewery 2 with address, pic and img</li>
-            <li>Brewery 3 with address, pic and img</li>
-        </div>
+<script>
+    function initMap() {
+  const sfBayCoords = {37.601773, -122.20287};
 
-        <div class="col-6">
-            <h2>Map should be below:</h2>
-            <section class="map">
-                <div id="map"></div>
-            </section>
-        </div>
-    </div>
-    
-  
-
-
-</div>
-<script 
-src="/static/js/google_map.js">
+  const basicMap = new google.maps.Map(document.querySelector('#map'), {
+    center: sfBayCoords,
+    zoom: 11,
+  });
+}
 </script>
+
+
+
+<!-- <script 
+ src="/static/js/google_map.js">
+</script> -->
+
+<!-- <script>
+    function initMap() {
+    // Code that works with Google Maps here
+    const searchCoords = {
+        lat: 32.7157,
+        lng: -117.1611,
+    };
+    console.log("1-Where's my map?")
+
+    const basicMap = new google.maps.Map(document.querySelector('#map'), {
+        center: searchCoords,
+        zoom: 11,
+    });
+    }
+</script> -->
+
+<!-- <script
+ async
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYatNOnq6iO2fyvj2S69oVygufw8_6T5A&callback=initMap">
+</script> -->
 
 <script
-async
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYatNOnq6iO2fyvj2S69oVygufw8_6T5A&callback=initMap">
+ async
+ src="https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyAYatNOnq6iO2fyvj2S69oVygufw8_6T5A">
 </script>
+
 {% endblock %}
