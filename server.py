@@ -133,16 +133,17 @@ def search_for_brewery():
 def display_map_on_brewery_results():
     """Display a map with the list of breweries returned on the brewery_results.html"""
     # TODO: #connect to Google Map API to display map with breweries found in search
-    location = request.args.get('location', '')
+    # location = request.args.get('location', '')
 
-    url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+    # url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
 
-    key=G_API_KEY
+    # key=G_API_KEY
 
-    map_location=location&key
+    # map_location=location&key
 
-    response = requests.get(url,)
-    pass
+    # response = requests.get(url,)
+    # pass
+    return render_template('google_maps.html')
 
 
 @app.route('/taco/search-display_map')

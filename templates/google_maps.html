@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Google Maps{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+   <div class="row">
+        <div class="col-6">
+            <h2>Taco Hop Brewery Search Results:</h2>
+            <ul class="brewery-results"></ul>
+            <li>Brewery 1 with address, pic and img</li>
+            <li>Brewery 2 with address, pic and img</li>
+            <li>Brewery 3 with address, pic and img</li>
+        </div>
+
+        <div class="col-6">
+            <h2>Map should be below:</h2>
+            <section class="map">
+                <div id="map"></div>
+            </section>
+        </div>
+    </div>
+    
+  
+
+
+</div>
+<script 
+src="/static/js/google_map.js">
+</script>
+
+<script
+async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYatNOnq6iO2fyvj2S69oVygufw8_6T5A&callback=initMap">
+</script>
+{% endblock %}
