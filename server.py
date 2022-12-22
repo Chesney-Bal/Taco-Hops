@@ -18,6 +18,7 @@ app = Flask(__name__)
 app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
 API_KEY=environ.get('API_TOKEN')
+G_API_KEY=environ.get('G_API_TOKEN')
 
 
 @app.route('/')
@@ -107,9 +108,12 @@ def trip_planner():
 
 @app.route('/brewery_trip_planner/search')
 def search_for_brewery():
-    "Search for brewery through Yelp"
+    """Search for brewery through Yelp"""
 
-    location = request.args.get('location', '')
+    location = request.args.get('location')
+    if not location:
+        flash('Location required!')
+        return redirect('/brewery_trip_planner')
 
     url ='https://api.yelp.com/v3/businesses/search' 
     headers = {'Authorization': 'Bearer '+API_KEY
@@ -125,11 +129,39 @@ def search_for_brewery():
 
     return render_template("brewery_search_results.html", breweries=breweries)
 
+@app.route('/brewery_trip_planner/search-display_map')
+def display_map_on_brewery_results():
+    """Display a map with the list of breweries returned on the brewery_results.html"""
+    # TODO: #connect to Google Map API to display map with breweries found in search
+    location = request.args.get('location', '')
+
+    url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+
+    key=G_API_KEY
+
+    map_location=location&key
+
+    response = requests.get(url,)
+    pass
+
+
+@app.route('/taco/search-display_map')
+def display_map_on_taco_results():
+    """Display a map with the list of tacoshops based on brewery location returned on the tacoshops_results.html"""
+    # TODO: #connect to Google Map API to display map with breweries found in search
+
+    pass
+
+
 
 @app.route('/taco')
 def tacoshops_nearby():
+    "Search for tacoshop based on selected brewery location through Yelp"
+
     lat=request.args.get("lat")
     long=request.args.get("long")
+
+    name=request.args.get("name")
 
     url ='https://api.yelp.com/v3/businesses/search' 
     headers = {'Authorization': 'Bearer '+API_KEY
@@ -144,7 +176,18 @@ def tacoshops_nearby():
     tacoshop_results=response.json()
     tacoshops=tacoshop_results['businesses']
 
-    return render_template('tacoshops_nearby.html', tacoshops=tacoshops)
+    for tacoshop in tacoshops:
+        address=" ".join(tacoshop['location']['display_address'])
+        tacoshop['address']=address
+
+#         "display_address": [
+#           "Herr",
+#           "Wesselstraat",
+#           "68c",
+#           "Hamburg, CA 22399"
+#         ],
+
+    return render_template('tacoshops_nearby.html', tacoshops=tacoshops, name=name)
 
 
 @app.route('/goodbye')
