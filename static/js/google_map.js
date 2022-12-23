@@ -10,7 +10,7 @@ function initMap() {
 
     const basicMap = new google.maps.Map(document.querySelector('#map'), {
         center: searchCoords,
-        zoom: 11,
+        zoom: 7,
     });
 
     // console.log("2-Now Where's my map?")

@@ -17,6 +17,7 @@ app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
 API_KEY=environ.get('API_TOKEN')
 G_API_KEY=environ.get('G_API_TOKEN')
+MB_API_TOKEN=environ.get('MB_API_TOKEN')
 
 
 @app.route('/')
@@ -137,11 +138,11 @@ def display_map_on_brewery_results():
 
     # key=G_API_KEY
 
-    # map_location=location&key
+    # MB_API_TOKEN=MB_API_TOKEN
 
     # response = requests.get(url,)
     # pass
-    return render_template('google_maps.html')
+    return render_template('display_map.html')
 
 
 @app.route('/taco/search-display_map')
