@@ -6,28 +6,59 @@
     <title>Display a map on a webpage</title>
 
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    
+
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 
-    <style>
-      body { margin: 0; padding: 0; }
-      #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-    </style>
+
   </head>
 
   <body>
-    <div id="map"></div>
-    <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdW9idWUxOGE3M25tZGZ4eHA1aXh3In0.5BD-FXMBNHiofK5Bi_ubdw';
-      const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-117.1611, 32.7157], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-      });
-    </script>
+
+    <div class="container">
+      <div class="row">
+
+        <div class ="col-2">
+          <h2> SOME CONTENT HERE</h2>
+          <ul>My List:</ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </div>
+      </div>
+    </div>
+
+    <div class ="container">
+        
+          <style>
+            body { margin: 0; padding: 0; }
+            #map { position: absolute; top: 10; bottom: 1; right: 0; left: 10; width: 50%; height: 70%; }
+          </style>
+      
+          <div id="map"></div>
+          <h4>{{coords}}</h4>
+          <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
+            const map = new mapboxgl.Map({
+              container: 'map', // container ID
+              // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+              style: 'mapbox://styles/mapbox/streets-v12', // style URL
+              center: [-117.1611, 32.7157], // starting position [lng, lat]
+              zoom: 12 // starting zoom
+            });
+
+            const marker = new mapboxgl.Marker()
+            .setLngLat([-117.22766660410099, 32.72286208649556])
+            .setPopup(new mapboxgl.Popup().setHTML("<h1>Eppig Brewing</h1>")) // add popup
+            .addTo(map);
+          </script>
+          
+    </div>
+
+
+      
+   
+    
   
   </body>
 </html>

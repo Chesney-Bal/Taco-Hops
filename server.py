@@ -142,7 +142,12 @@ def display_map_on_brewery_results():
 
     # response = requests.get(url,)
     # pass
-    return render_template('display_map.html')
+
+    lng=-110.9742 
+    lat=32.2540
+    coords=[lng,lat]
+
+    return render_template('display_map.html', coords=coords)
 
 
 @app.route('/taco/search-display_map')

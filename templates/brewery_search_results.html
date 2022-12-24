@@ -24,6 +24,13 @@
     </div>
 
     <div class="row">
+      <div class="column">
+        <p>these are coordinates. lng={{brewery['coordinates']['longitude']}}. lat={{brewery['coordinates']['latitude']}} </p>
+
+      </div>
+    </div>
+
+    <div class="row">
       <div class="column">    
         <p>See What Taco Shops are nearby: 
           <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" >
@@ -34,6 +41,18 @@
     </div>
   </div>
   {% endfor %}
+
+<div class="container">
+  loop through breweries for coordsinates 
+  make a list of lists of lng, lat
+  add script from display_map here
+
+  center of map should be search location's coordinates (e.g. North Park)
+
+  markers will be the breweries from the search
+
+  pop ups will have brewery name, display address, link for tacos?
+</div>
 
 </div>
 {% endblock %}
