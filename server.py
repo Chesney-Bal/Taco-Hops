@@ -127,6 +127,7 @@ def search_for_brewery():
     breweries=brewery_results['businesses']
     center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude'],]
 
+
     return render_template("brewery_search_results.html", breweries=breweries, center=center)
 
 @app.route('/brewery_trip_planner/search-display_map')

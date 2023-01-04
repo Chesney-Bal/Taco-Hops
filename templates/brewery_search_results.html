@@ -21,15 +21,19 @@
 
   <body> 
     <div class="container">
+      TODO:
       loop through breweries for coordsinates 
       make a list of lists of lng, lat
-      add script from display_map here
-    
-      center of map should be search location's coordinates (e.g. North Park)
-    
       markers will be the breweries from the search
-    
       pop ups will have brewery name, display address, link for tacos?
+
+      <!-- DONE:
+      add script from display_map here
+      center of map should be search location's coordinates (e.g. North Park) -->
+    
+
+    
+
     </div>
 
     <div class ="container">
@@ -41,6 +45,11 @@
     
       <div id="map"></div>
       <h4>This should be center long/lat:{{center}}</h4>
+      
+      brewery_marker_list=[]
+      {% for brewery in breweries %}
+        brewery_marker_list.push([{{brewery['coordinates']['longitude']}},{{brewery['coordinates']['latitude']}}]);
+      {% endfor %}
 
       <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
@@ -52,12 +61,21 @@
           center:{{center}},
           zoom: 12 // starting zoom
         });
-    
+        
+        const eppig_lng=-117.22766660410099
+        const eppig_lat=32.72286208649556
+        const marker_list=[eppig_lng, eppig_lat]
+
         const marker = new mapboxgl.Marker()
-        .setLngLat([-117.22766660410099, 32.72286208649556])
-        .setPopup(new mapboxgl.Popup().setHTML("<h4>Eppig Brewing</h4>")) // add popup
+        .setLngLat(marker_list)
+        .setPopup(new mapboxgl.Popup().setHTML("<h4>BEER</h4>")) // add popup
         .addTo(map);
+        
+
+
       </script>
+
+
       
     </div>
 
