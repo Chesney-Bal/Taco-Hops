@@ -1,25 +1,22 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 
-{% block title %}Search By Brewery{% endblock %}
+{% block title %}Search By Brewery and Display Map{% endblock %}
 
-{% block body %}  -->
 
-<!DOCTYPE html>
-<html>
-  <head>
+
+
+  {% block head %}
     <meta charset="utf-8">
 
-    <title>Search by brewery and display map</title>
 
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 
+  {% endblock %}
 
-  </head>
-
-  <body> 
+  {% block body %} 
     <div class="container">
       TODO:
       loop through breweries for coordsinates 
@@ -44,38 +41,8 @@
       </style>
     
       <div id="map"></div>
-      <h4>This should be center long/lat:{{center}}</h4>
-      
-      brewery_marker_list=[]
-      {% for brewery in breweries %}
-        brewery_marker_list.push([{{brewery['coordinates']['longitude']}},{{brewery['coordinates']['latitude']}}]);
-      {% endfor %}
 
-      <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
-        const map = new mapboxgl.Map({
-          container: 'map', // container ID
-          // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-          style: 'mapbox://styles/mapbox/streets-v12', // style URL
-          // center: [-117.1611, 32.7157], // starting position [lng, lat]
-          center:{{center}},
-          zoom: 12 // starting zoom
-        });
-        
-        const eppig_lng=-117.22766660410099
-        const eppig_lat=32.72286208649556
-        const marker_list=[eppig_lng, eppig_lat]
-
-        const marker = new mapboxgl.Marker()
-        .setLngLat(marker_list)
-        .setPopup(new mapboxgl.Popup().setHTML("<h4>BEER</h4>")) // add popup
-        .addTo(map);
-        
-
-
-      </script>
-
-
+    
       
     </div>
 
@@ -100,7 +67,7 @@
 
     <div class="row">
       <div class="column">
-        <p>these are coordinates. lng={{brewery['coordinates']['longitude']}}. lat={{brewery['coordinates']['latitude']}} </p>
+        <p>these are coordinates. lng={{brewery['coordinates']['longitude']}} lat={{brewery['coordinates']['latitude']}} </p>
 
       </div>
     </div>
@@ -120,7 +87,17 @@
 
 
 </div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+  console.log('hi');
+  let center = {{center}};
+  let response = {{mapbox_data}};
+</script>
+
+<!-- <script type="text/javascript" src="/static/js/Mapbox.js"></script> -->
 
 
-</body>
-<!-- {% endblock %} -->
+{% endblock %}

@@ -1,11 +1,12 @@
 """Flask site for TacoHops app."""
 
-from flask import (Flask, session, render_template, request, flash, redirect)
+from flask import (Flask, session, render_template, request, flash, redirect, jsonify)
 from os import environ
 from datetime import date, datetime
 from pprint import pformat
 import requests
 import json
+
 
 from model import connect_to_db, db
 import crud
@@ -103,7 +104,7 @@ def trip_planner():
     """Returns page to plan brewery and taco trip"""
 
     return render_template('brewery_trip_planner.html')
-
+map_data=None
 
 @app.route('/brewery_trip_planner/search')
 def search_for_brewery():
@@ -126,9 +127,12 @@ def search_for_brewery():
     brewery_results=response.json()
     breweries=brewery_results['businesses']
     center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude'],]
+    mapbox_data=json.dump(breweries)
+    # # print(dir(mapbox_data))
+    print(type(mapbox_data))
+    print(mapbox_data)
 
-
-    return render_template("brewery_search_results.html", breweries=breweries, center=center)
+    return render_template("brewery_search_results.html", breweries=breweries, mapbox_data=mapbox_data, center=jsonify(center).json )
 
 @app.route('/brewery_trip_planner/search-display_map')
 def display_map_on_brewery_results():
