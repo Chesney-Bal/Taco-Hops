@@ -126,13 +126,13 @@ def search_for_brewery():
     response = requests.get(url, headers=headers, params=payload)
     brewery_results=response.json()
     breweries=brewery_results['businesses']
-    center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude'],]
-    mapbox_data=json.dump(breweries)
+    center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude']]
+    mapbox_data=json.dumps(breweries)
     # # print(dir(mapbox_data))
-    print(type(mapbox_data))
-    print(mapbox_data)
+    # print(type(mapbox_data))
+    # print(mapbox_data)
 
-    return render_template("brewery_search_results.html", breweries=breweries, mapbox_data=mapbox_data, center=jsonify(center).json )
+    return render_template("brewery_search_results.html", breweries=breweries, mapbox_data=mapbox_data, center=center)
 
 @app.route('/brewery_trip_planner/search-display_map')
 def display_map_on_brewery_results():

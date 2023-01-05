@@ -24,13 +24,6 @@
       markers will be the breweries from the search
       pop ups will have brewery name, display address, link for tacos?
 
-      <!-- DONE:
-      add script from display_map here
-      center of map should be search location's coordinates (e.g. North Park) -->
-    
-
-    
-
     </div>
 
     <div class ="container">
@@ -42,8 +35,9 @@
     
       <div id="map"></div>
 
+      <div id="map_center" data-long="{{center[0]}}" data-lat="{{center[1]}}">
+      </div>
     
-      
     </div>
 
 <div class="container">
@@ -91,13 +85,14 @@
 
 {% block js %}
 
-<script>
+<script type="text/javascript" src="/static/js/Mapbox.js"></script>
+<!-- <script>
   console.log('hi');
   let center = {{center}};
   let response = {{mapbox_data}};
-</script>
+</script> -->
 
-<!-- <script type="text/javascript" src="/static/js/Mapbox.js"></script> -->
+
 
 
 {% endblock %}
