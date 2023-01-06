@@ -26,7 +26,7 @@
   </div>
 
   <div class="container">
-    <h3> Taco Shops near {{name}}:</h3>
+    <h2> Taco Shops near {{name}}:</h2>
 
     {% for tacoshop in tacoshops %}
       <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}"></div>
