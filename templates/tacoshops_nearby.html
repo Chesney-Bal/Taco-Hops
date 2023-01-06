@@ -2,26 +2,62 @@
 
 {% block title %}Nearby TacoShop Results{% endblock %}
 
+
+{% block head %}
+<meta charset="utf-8">
+
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+
+{% endblock %}
+
 {% block body %} 
+  <div class ="container">
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 10; bottom: 1; right: 0; left: 10; width: 50%; height: 70%; }
+    </style>
 
-<div class="container">
-    <div class="row">
-      <div class="column">
-        <h2> Taco Shops close to {{name}}:</h2>
-      </div>
-    </div>
+    <div id="map"></div>
 
-    <div class="row">
-      <div class="col-6">
-        <h2> Taco Shops nearby:</h2>
-        <ul class="tacoshop-search">
-        {% for tacoshop in tacoshops%}
-        <li><a href="{{tacoshop['url']}}" target="_blank">
-            {{tacoshop['name']}} </a></li>
-          <address>{{tacoshop['address']}}</address>
-          <img src="{{tacoshop['image_url']}}" width="200">
-          {% endfor %}
-        </ul>
-</div>
+    <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}"></div>
+  </div>
 
-  {% endblock %}
+  <div class="container">
+    <h3> Taco Shops near {{name}}:</h3>
+
+    {% for tacoshop in tacoshops %}
+      <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}"></div>
+        <div class="row">
+          <div class="col-6">
+            <ul class="tacoshop-results"></ul>
+            <li><a href="{{tacoshop['url']}}" target="_blank">
+              {{tacoshop['name']}} </a></li>
+          </div>
+        </div>   
+      
+        <div class="row">
+          <div class="col-5">
+            <img src="{{tacoshop['image_url']}}" width="200">
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="column">    
+              <p>
+                <address>{{tacoshop['address']}}</address>
+              </p>
+          </div>
+       </div>
+    {% endfor %}
+
+  </div>
+{% endblock %}
+
+{% block js %}
+
+<scipt type="text/javascript" src="/static/js/TacoShopMaps.js"></scipt>
+
+{% endblock %}

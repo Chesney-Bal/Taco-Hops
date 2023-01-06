@@ -27,10 +27,9 @@ def are_you_21 (birthDate):
     """Is the user old enough?"""
     age = calculateAge(birthDate)
     if age >= 21:
-
         return True
-    else:
 
+    else:
         return False
 
 

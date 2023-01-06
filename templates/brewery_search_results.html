@@ -3,11 +3,8 @@
 {% block title %}Search By Brewery and Display Map{% endblock %}
 
 
-
-
   {% block head %}
     <meta charset="utf-8">
-
 
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 
@@ -17,82 +14,55 @@
   {% endblock %}
 
   {% block body %} 
-    <div class="container">
-      TODO:
-      loop through breweries for coordsinates 
-      make a list of lists of lng, lat
-      markers will be the breweries from the search
-      pop ups will have brewery name, display address, link for tacos?
-
-    </div>
-
     <div class ="container">
-        
       <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 10; bottom: 1; right: 0; left: 10; width: 50%; height: 70%; }
       </style>
-    
+
       <div id="map"></div>
 
-      <div id="map_center" data-long="{{center[0]}}" data-lat="{{center[1]}}">
-      </div>
-    
+      <div id="map_center" data-long="{{center[0]}}" data-lat="{{center[1]}}"></div>
     </div>
 
-<div class="container">
-  <h2>Taco Hop Brewery Search Results:</h2>
+    <div class="container">
+      <h3>Taco Hop Breweries near {{location}}:</h3>
 
-  {% for brewery in breweries %}
-  <div class="coordinates" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}">
-    <div class="row">
-      <div class="col-6">
-        <ul class="brewery-results"></ul>
-        <li><a href="{{brewery['url']}}" target="_blank">
-          {{brewery['name']}} </a></li>
+      {% for brewery in breweries %}
+      <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}">
+        <div class="row">
+          <div class="col-6">
+            <ul class="brewery-results"></ul>
+            <li><a href="{{brewery['url']}}" target="_blank">
+              {{brewery['name']}} </a></li>
+          </div>
+        </div>  
+      
+        <div class="row">
+          <div class="col-5">
+            <img src="{{brewery['image_url']}}" width="200">
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="column">    
+              <p>See What Taco Shops are nearby:</p> 
+                <p>
+                  <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" >
+                  {{brewery['address']}}
+                  </a> 
+                </p>
+            </div>
+          </div>
+      
       </div>
-    </div>  
-  
-    <div class="row">
-      <div class="col-5">
-        <img src="{{brewery['image_url']}}" width="200">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column">
-        <p>these are coordinates. lng={{brewery['coordinates']['longitude']}} lat={{brewery['coordinates']['latitude']}} </p>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column">    
-        <p>See What Taco Shops are nearby: 
-          <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" >
-            {{brewery['location']['display_address']}}
-          </a> 
-        </p>
-      </div>
-    </div>
-  </div>
   {% endfor %}
-
-
 
 </div>
 {% endblock %}
 
 {% block js %}
 
-<script type="text/javascript" src="/static/js/Mapbox.js"></script>
-<!-- <script>
-  console.log('hi');
-  let center = {{center}};
-  let response = {{mapbox_data}};
-</script> -->
-
-
-
+<script type="text/javascript" src="/static/js/Mapbox_breweries.js"></script>
 
 {% endblock %}

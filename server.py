@@ -39,6 +39,8 @@ def verify_age():
         session['is of age']=True
         return redirect('/homepage')
 
+
+
     #if not 21- user gets redirected to goodbye page
     return redirect('/goodbye')
 
@@ -104,8 +106,8 @@ def trip_planner():
     """Returns page to plan brewery and taco trip"""
 
     return render_template('brewery_trip_planner.html')
-map_data=None
 
+#route for page display brewery's found and map
 @app.route('/brewery_trip_planner/search')
 def search_for_brewery():
     """Search for brewery through Yelp"""
@@ -127,44 +129,15 @@ def search_for_brewery():
     brewery_results=response.json()
     breweries=brewery_results['businesses']
     center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude']]
-    mapbox_data=json.dumps(breweries)
-    # # print(dir(mapbox_data))
-    # print(type(mapbox_data))
-    # print(mapbox_data)
 
-    return render_template("brewery_search_results.html", breweries=breweries, mapbox_data=mapbox_data, center=center)
+    for brewery in breweries:
+        address=" ".join(brewery['location']['display_address'])
+        brewery['address']=address
 
-@app.route('/brewery_trip_planner/search-display_map')
-def display_map_on_brewery_results():
-    """Display a map with the list of breweries returned on the brewery_results.html"""
-    # TODO: #connect to Google Map API to display map with breweries found in search
-    # location = request.args.get('location', '')
-
-    # url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-
-    # key=G_API_KEY
-
-    # MB_API_TOKEN=MB_API_TOKEN
-
-    # response = requests.get(url,)
-    # pass
-
-    lng=-110.9742 
-    lat=32.2540
-    coords=[lng,lat]
-
-    return render_template('display_map.html', coords=coords)
+    return render_template("brewery_search_results.html", breweries=breweries,  center=center, location=location)
 
 
-@app.route('/taco/search-display_map')
-def display_map_on_taco_results():
-    """Display a map with the list of tacoshops based on brewery location returned on the tacoshops_results.html"""
-    # TODO: #connect to Google Map API to display map with breweries found in search
-
-    pass
-
-
-
+#route for page dispaly taco shops found near brewery and map
 @app.route('/taco')
 def tacoshops_nearby():
     "Search for tacoshop based on selected brewery location through Yelp"
@@ -183,6 +156,9 @@ def tacoshops_nearby():
                 'latitude': lat
     }
 
+    taco_map_center=[long, lat]
+    print(taco_map_center) #prints correct long, lat
+
     response = requests.get(url, headers=headers, params=payload)
     tacoshop_results=response.json()
     tacoshops=tacoshop_results['businesses']
@@ -191,14 +167,8 @@ def tacoshops_nearby():
         address=" ".join(tacoshop['location']['display_address'])
         tacoshop['address']=address
 
-#         "display_address": [
-#           "Herr",
-#           "Wesselstraat",
-#           "68c",
-#           "Hamburg, CA 22399"
-#         ],
 
-    return render_template('tacoshops_nearby.html', tacoshops=tacoshops, name=name)
+    return render_template('tacoshops_nearby.html', tacoshops=tacoshops, name=name, taco_map_center=taco_map_center )
 
 
 @app.route('/goodbye')
