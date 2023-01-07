@@ -17,7 +17,6 @@ def get_user_by_email (email):
     return User.query.filter(User.email == email).first()
 
 
-
 def calculateAge(birthDate):
     today=date.today()
     age= today.year -birthDate.year - ((today.month, today.day)<(birthDate.month, birthDate.day))
@@ -31,6 +30,18 @@ def are_you_21 (birthDate):
 
     else:
         return False
+
+
+def get_user_id_by_email (email):
+    """returns user_id using email to search database"""
+    
+    
+    user_id=User.email(user_id=user_id)
+    
+    print(user_id)
+
+    return User.query.filter(user_id == user_id)
+
 
 
 
