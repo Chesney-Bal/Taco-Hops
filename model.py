@@ -13,7 +13,7 @@ class User(db.Model):
     email = db.Column(db.String (100), unique=True, nullable=False)
     password = db.Column(db.String(25), nullable=False)
 
-    pairing=db.relationship("Pairing", back_populates="user")
+    favorites=db.relationship("Favorites", back_populates="user")
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
@@ -23,13 +23,13 @@ class Brewery(db.Model):
     __tablename__ ="breweries"
 
     brewery_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    brewery_name=db.Column(db.String(50))
+    email=db.Column(db.Integer, db.ForeignKey('users.email'))
+    brewery_name=db.Column(db.String(50)) #businesses['name']
     brewery_address=db.Column(db.String(250))
-    brewery_website=db.Column(db.String)
-    brewery_image=db.Column(db.String)
+    brewery_website=db.Column(db.String) #businesses['url']
+    brewery_image=db.Column(db.String) #businesses['image_url']
 
-    pairing=db.relationship("Pairing", back_populates="brewery")
+    favorites=db.relationship("Favorites", back_populates="brewery")
 
     def __repr__(self):
         return f'<Brewery brewery_id={self.brewery_id} brewery_name={self.brewery_name}>'    
@@ -45,26 +45,26 @@ class Tacoshop(db.Model):
     tacoshop_website=db.Column(db.String)
     tacoshop_image=db.Column(db.String)
 
-    pairing=db.relationship("Pairing", back_populates="tacoshop")
+    favorites=db.relationship("Favorites", back_populates="tacoshop")
 
     def __repr__(self):
         return f'<Tacoshop tacoshop_id={self.tacoshop_id} tacoshop_name={self.tacoshop_name}>'  
 
-class Pairing(db.Model):
-    """A pairing of a brewery and tacoshop"""
-    __tablename__="pairings"
+class Favorites(db.Model):
+    """Users favorite taco shops and breweries"""
+    __tablename__="favorites"
 
-    pairing_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    favorite_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email=db.Column(db.Integer, db.ForeignKey('users.email'))
     brewery_id=db.Column(db.Integer, db.ForeignKey('breweries.brewery_id'))
     tacoshop_id=db.Column(db.Integer, db.ForeignKey('tacoshops.tacoshop_id'))
 
-    user=db.relationship("User", back_populates="pairing")
-    brewery=db.relationship("Brewery", back_populates="pairing")
-    tacoshop=db.relationship("Tacoshop", back_populates="pairing")
+    user=db.relationship("User", back_populates="favorites")
+    brewery=db.relationship("Brewery", back_populates="favorites")
+    tacoshop=db.relationship("Tacoshop", back_populates="favorites")
 
     def __repr__(self):
-        return f'<Pairing pairing_id={self.pairing_id} tacoshop_id={self.tacoshop_id} brewery_id={self.brewery_id}>'  
+        return f'<Favorites favorite_id={self.favorite_id} tacoshop_id={self.tacoshop_id} brewery_id={self.brewery_id} email={self.email}>'  
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///users", echo=True):

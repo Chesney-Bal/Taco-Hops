@@ -111,16 +111,11 @@ def trip_planner():
 @app.route('/user_profile')
 def user_profile():
     """Returns a page that has user profile info on it"""
-
-
     
     user=session["user_email"]
 
     
-    user_id = crud.get_user_id_by_email(user)
-    print(user_id)
-
-    return render_template('user_details.html', user=user,)
+    return render_template('user_details.html', user=user)
 
 #route for page display brewery's found and map
 @app.route('/brewery_trip_planner/search')
