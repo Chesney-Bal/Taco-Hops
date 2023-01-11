@@ -29,7 +29,7 @@
       <h2>Taco Hop Breweries near {{location}}:</h2>
 
       {% for brewery in breweries %}
-      <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}">
+      <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}" >
         <div class="row">
           <div class="col-6">
             <ul class="brewery-results"></ul>
@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <button>Favorite</button>
+        <button id="fav_brewery_btn" data-brewery_id="{{brewery['id']}}" data-name="{{brewery['name']}}" data-address="{{brewery['address']}}">Favorite</button>
         
           <div class="row">
             <div class="column">    

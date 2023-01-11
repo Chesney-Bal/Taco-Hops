@@ -27,6 +27,7 @@ class Fav_Brewery(db.Model):
     brewery_id = db.Column(db.String, primary_key=True) #come from yelp API bussiness[id]
     brewery_name=db.Column(db.String(50)) #businesses['name']
     brewery_address=db.Column(db.String(250))
+    favorite_brewery=db.Column(db.Boolean(True)) #when an instnace is made should default be True since instances only made when brewery is being favorited?
 
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
     
@@ -42,6 +43,7 @@ class Fav_Tacoshop(db.Model):
     tacoshop_id = db.Column(db.String, primary_key=True) #come from yelp API bussiness[id]
     tacoshop_name=db.Column(db.String(50)) #businesses['name']
     tacoshop_address=db.Column(db.String(250))
+    favorite_tacoshop=db.Column(db.Boolean(True))
 
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
 

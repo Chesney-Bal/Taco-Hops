@@ -37,7 +37,47 @@ for (const brewery of brewery_marker_list) {
         .addTo(map); 
   };   
 
-  
+
+
+function favoriteBrewery(){ 
+  console.log('testing testing')
+//get brewery_id from datset on favorite button
+const brewery_fav_button = document.querySelector(dataset.brewery_id);
+console.log('Can you hear me now?')
+//create event listener for favorite button in brewery_search_retults.html
+brewery_fav_button.addEventListener('click', () =>{
+  const url = `/fav_brewery?${dataset.brewery_id, dataset.name, dataset.address}`;
+  console.log('button click heard')
+  fetch (url) //sending brewery_id plus other info to server to create brewery record
+    .then ((response) => response.text())
+    .then((status) =>{
+
+      brewery_fav_button.innerHTML = "My Fave"; //updating Favorite button once response received
+      brewery_fav_button.disabled= true; //makes it so user can't favorite that brewery again
+    })
+});
+};  
+
+
+
+// //on CLICK target, make request to ??? API or DB
+//   if (favBtn) {
+//     const url = 
+
+//     fetch(url)
+//     .then((response) => response.json()) //how does this need to be updated to get brewery info
+//     .then((resp) => {
+//       if (resp.status=="Success") {
+//         console.log(`${resp.status}- ${resp.msg}`);
+//         favBtn.innerHTML = "My Fave"; //updating Favorite button once response received
+//         favBtn.disabled= true; //makes it so user can't favorite that brewery again
+//       } else {
+//         console.log(`${resp.status} -${resp.msg}`);
+//         favBtn.innerHTML = "Already been favorited.";
+//         favBtn.disabled = true;
+//       }
+//     });
+//   };
 
 
 

@@ -147,6 +147,22 @@ def search_for_brewery():
     return render_template("brewery_search_results.html", breweries=breweries,  center=center, location=location)
 
 
+@app.route('/fav_brewery')
+def favorite_brewery(user, brewery):
+    """user can click on button to save favorite brewery when logged in"""
+
+    print("Who is user in session?")
+    user=session["user_email"] # should this be user id instead?
+
+    #PROCESS POST REQUEST
+
+    brewery=crud.add_fav_brewery (brewery_id, name, address, favorite_brewery)
+
+    flash("Brewery Added to Favorites Succesfully!")
+    
+    return ("Success")  #what should be returned to Fetch? Is "success" adequate?
+
+
 #route for page dispaly taco shops found near brewery and map
 @app.route('/taco')
 def tacoshops_nearby():

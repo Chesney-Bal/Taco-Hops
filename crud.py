@@ -1,5 +1,5 @@
 """CRUD operations"""
-from model import db, User, Brewery, Tacoshop, Favorites, connect_to_db
+from model import db, User, Fav_Brewery, Fav_Tacoshop, connect_to_db
 from datetime import date
 
 #functions start here!
@@ -43,58 +43,58 @@ def get_user_id_by_email (email):
     return User.query.filter(user_id == user_id)
 
 
-def get_brewery_info_from_api():
-    
-#from @app.route('brewery_trip_planner/search'): is the following code- will this work in crdu.py?????
-    url ='https://api.yelp.com/v3/businesses/search' 
-    headers = {'Authorization': 'Bearer '+API_KEY
-    }
-    
-    payload ={  'term': 'brewery',
-                'location': location
-    }
-    response = requests.get(url, headers=headers, params=payload)
-    brewery_results=response.json()
-    breweries=brewery_results['businesses']
-    return breweries
-
-
-
-def add_fav_brewery(email, brewery_name):
-    """Add user favorite brewery to database"""
-
-#??How do I ensure that the brewery_record info is coming from API after a search (is above call sufficient????)
-#??Should the brewery_record go in Brewery db or Favorites db? (currently going to Brewery)
-#??favorites can be an Association databse between Users and Brewery/Tacoshop db but Brewery/Tacoshops should update from search not from db
-
-    if not Brewery.query.get(brewery_name):
-        print("Brewery not found in db yet")
-        brewery= get_brewery_info_from_api()  #??create this function to get info from search-do I need to specify a specific establishment?
-        dispaly_address=get_address_from_brewery(brewery)
-        image_url=get_image_url(brewery)
-
-    brewery_record = create_brewery(
-        brewery_id=brewery_id #brewery_id is primary_key in Brewery.db in model.py
-        brewery_name=breweries['name'], #will this pull the name from the API search
-        brewery_address=breweries['locatin']['display_address'],     #will this pull the address from the API search   
-        brewery_website=breweries['url'], #will this pull the url from the API search
-        brewery_image=breweries['image_url'], #will this pull image name from the API search
+def add_fav_brewery(brewery_id, name, address, favorite_brewery):
+    """Creates and returns a brewery"""
+    brewery= Fav_Brewery(
+        brewery_id=brewery_id,
+        name=name,
+        address=address,
+        favorite_brewery=favorite_brewery
     )
 
-    print('Created brewery')
-    db.session.add(brewery_record)
+    db.session.add(brewery)
     db.session.commit()
+    print("Favorite Brewery function ran")
+    return ("Success")
 
-    #add this brewery to user favorites (Favorite db)
-    favorite_brewery= Favorites(brewery_name=brewery_name, email=email)
-    db.session.add(favorite_brewery)
-    db.session.commit()
-    # try:
-    #     db.session.commit()
-    # except IntegrityError as e:
-    #     print("exception was caught")
-    #     return "Fail"
-    # return "Success"
+# def create_brewery_record(brewery_id, brewery_name, brewery_address, brewery_website, brewery_image):
+#     """create a brewery record based on api search"""
+#     brewery_record = 
+
+
+# def add_fav_brewery(user_id, brewery_id):
+#     """Add user favorite brewery to database"""
+
+# #??How do I ensure that the brewery_record info is coming from API after a search (is above call sufficient????)
+# #??Should the brewery_record go in Brewery db or Favorites db? (currently going to Brewery)
+# #??favorites can be an Association databse between Users and Brewery/Tacoshop db but Brewery/Tacoshops should update from search not from db
+
+#     if not Brewery.query.get(brewery_name):
+#         print("Brewery not found in db yet")
+#         breweries= get_brewery_info_from_api()  #??create this function to get info from search-do I need to specify a specific establishment?
+#         dispaly_address=get_address_from_brewery(breweries)
+#         image_url=get_image_url(breweries)
+
+#     brewery_record = create_brewery_record( #do i need to make a create_brewery function?
+#         brewery_id=brewery_id #brewery_id is primary_key in Brewery.db in model.py
+#         brewery_name=breweries['name'], #will this pull the name from the API search
+#         brewery_address=breweries['location']['display_address'],     #will this pull the address from the API search   
+#     )
+
+#     print('Created brewery')
+#     db.session.add(brewery_record)
+#     db.session.commit()
+
+#     #add this brewery to user favorites (Favorite db)
+#     favorite_brewery= Favorites(brewery_name=brewery_name, email=email)
+#     db.session.add(favorite_brewery)
+#     db.session.commit()
+#     # try:
+#     #     db.session.commit()
+#     # except IntegrityError as e:
+#     #     print("exception was caught")
+#     #     return "Fail"
+#     # return "Success"
 
 
 if __name__=="__main__":
