@@ -147,20 +147,26 @@ def search_for_brewery():
     return render_template("brewery_search_results.html", breweries=breweries,  center=center, location=location)
 
 
-@app.route('/fav_brewery')
-def favorite_brewery(user, brewery):
+@app.route('/fav_brewery', methods=['POST'])
+def favorite_brewery():
     """user can click on button to save favorite brewery when logged in"""
 
     print("Who is user in session?")
-    user=session["user_email"] # should this be user id instead?
 
+    user_email=session["user_email"] 
+    user_id=crud.get_user_id_by_email(user_email)
     #PROCESS POST REQUEST
+    brewery_id=request.json['brewery_id']
+    name=request.json['brewery_name']
+    address=request.json['brewery_address']
+    is_favorite=True
 
-    brewery=crud.add_fav_brewery (brewery_id, name, address, favorite_brewery)
+    crud.add_fav_brewery (brewery_id, name, address, is_favorite, user_id)
 
     flash("Brewery Added to Favorites Succesfully!")
     
-    return ("Success")  #what should be returned to Fetch? Is "success" adequate?
+    #return Success goes to response in javascript fetch
+    return "Success" 
 
 
 #route for page dispaly taco shops found near brewery and map

@@ -35,27 +35,24 @@ def are_you_21 (birthDate):
 def get_user_id_by_email (email):
     """returns user_id using email to search database"""
     
-    
-    user_id=User.email
-    
-    print(user_id)
 
-    return User.query.filter(user_id == user_id)
+    return User.query.filter_by(email = email).first().user_id
 
 
-def add_fav_brewery(brewery_id, name, address, favorite_brewery):
+def add_fav_brewery(brewery_id, name, address, is_favorite, user_id):
     """Creates and returns a brewery"""
     brewery= Fav_Brewery(
-        brewery_id=brewery_id,
-        name=name,
-        address=address,
-        favorite_brewery=favorite_brewery
+        brewery_id=brewery_id,  
+        brewery_name=name,  #brewery_name naming convention is from db
+        brewery_address=address,
+        is_favorite=is_favorite,
+        user_id=user_id
     )
 
     db.session.add(brewery)
     db.session.commit()
     print("Favorite Brewery function ran")
-    return ("Success")
+
 
 # def create_brewery_record(brewery_id, brewery_name, brewery_address, brewery_website, brewery_image):
 #     """create a brewery record based on api search"""
