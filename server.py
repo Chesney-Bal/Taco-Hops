@@ -151,22 +151,31 @@ def search_for_brewery():
 def favorite_brewery():
     """user can click on button to save favorite brewery when logged in"""
 
-    print("Who is user in session?")
+    if 'user_email' in session:     #if logged in-they can favorite things- 
+        user_email=session["user_email"]
+    else:
+        user_email= None            #if not-logged in they can't favorite things
+        flash ("Must be logged in to use Favorites Feature") 
 
-    user_email=session["user_email"] 
     user_id=crud.get_user_id_by_email(user_email)
-    #PROCESS POST REQUEST
+
     brewery_id=request.json['brewery_id']
     name=request.json['brewery_name']
     address=request.json['brewery_address']
     is_favorite=True
 
-    crud.add_fav_brewery (brewery_id, name, address, is_favorite, user_id)
+    is_created = crud.add_fav_brewery (user_id, brewery_id, name, address, is_favorite)
 
-    flash("Brewery Added to Favorites Succesfully!")
+    if is_created:
+        return "Success", 201
+
+    # flash("Brewery Added to Favorites Succesfully!") flashing on search page not brewery results page
     
     #return Success goes to response in javascript fetch
-    return "Success" 
+    return "Failure" , 409
+
+        
+
 
 
 #route for page dispaly taco shops found near brewery and map
@@ -189,7 +198,7 @@ def tacoshops_nearby():
     }
 
     taco_map_center=[long, lat]
-    print(taco_map_center) #prints correct long, lat
+
 
     response = requests.get(url, headers=headers, params=payload)
     tacoshop_results=response.json()

@@ -24,12 +24,13 @@ class Fav_Brewery(db.Model):
     """A brewery."""
     __tablename__ ="breweries"
 
-    brewery_id = db.Column(db.String, primary_key=True) #come from yelp API bussiness[id]
+    user_fav_brewery_id=db.Column(db.Integer, primary_key=True, autoincrement=True)
+    brewery_id = db.Column(db.String) #come from yelp API bussiness[id]
     brewery_name=db.Column(db.String(50)) #businesses['name']
     brewery_address=db.Column(db.String(250))
     is_favorite=db.Column(db.Boolean(True)) #when an instnace is made should default be True since instances only made when brewery is being favorited?
 
-    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
     user=db.relationship("User", back_populates="fav_breweries") 
 
