@@ -40,7 +40,7 @@ def get_user_id_by_email (email):
 
 
 def add_fav_brewery(user_id, brewery_id, name, address, is_favorite):
-    """Creates and returns a brewery"""
+    """Creates a favorite brewery in Fav_Brewery Databse"""
     favorite=Fav_Brewery.query.filter((Fav_Brewery.brewery_id==brewery_id) & (Fav_Brewery.user_id==user_id)).first()
     if not favorite:
         print("brewery_id & user_id not found in Fav_brewery DB, create new record") #need this to search for brewery_id and User_id in one instance
@@ -60,8 +60,42 @@ def add_fav_brewery(user_id, brewery_id, name, address, is_favorite):
         print("did not create new record")
         return False
 
+def add_fav_tacoshop(user_id, tacoshop_id, tacoshop_name, tacoshop_address, is_fav_tacoshop, nearby_brewery):
+    """Creates a favorite tacoshop in Fav_Tacoshop Databse"""
+    fav_T=Fav_Tacoshop.query.filter((Fav_Tacoshop.tacoshop_id==tacoshop_id) & (Fav_Tacoshop.nearby_brewery==nearby_brewery) & (Fav_Tacoshop.user_id==user_id)).first()
+    if not fav_T:
+        print("tacoshop_id & user_id not found in Fav_Tacoshop DB, create new record") #need this to search for tacoshop_id and User_id in one instance
+
+        tacoshop= Fav_Tacoshop(
+            user_id=user_id,
+            tacoshop_id=tacoshop_id,  
+            tacoshop_name=tacoshop_name,  #tacoshop_name naming convention is from db
+            tacoshop_address=tacoshop_address,
+            is_fav_tacoshop=is_fav_tacoshop,
+            nearby_brewery=nearby_brewery,
+        )
+
+        db.session.add(tacoshop)
+        db.session.commit()
+        return True
+    else:
+        print("did not create new tacoshop record")
+        return False
 
 
+def get_favorites_by_user_id(user_id):
+    """returns favorite breweries by user_id"""
+    
+     #change function name to get_fav_brewery_by_user_id
+     #confirm naming update across project
+
+    return Fav_Brewery.query.filter_by(user_id=user_id).all()
+
+def get_fav_tacoshop_by_user_id(user_id):
+    """returns favorite tacoshops by user_id"""
+
+
+    return Fav_Tacoshop.query.filter_by(user_id=user_id).all()
 
 if __name__=="__main__":
     from server import app

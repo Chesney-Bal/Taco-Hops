@@ -26,7 +26,7 @@
   </div>
 
   <div class="container">
-    <h2> Taco Shops near {{name}}:</h2>
+    <h2> Taco Shops near {{brewery_name}}:</h2>
 
     {% for tacoshop in tacoshops %}
       <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}"></div>
@@ -43,6 +43,8 @@
             <img src="{{tacoshop['image_url']}}" width="200">
           </div>
         </div>  
+
+        <button id="fav_tacoshop_btn" data-tacoshop_id="{{tacoshop['id']}}" data-tacoshop_name="{{tacoshop['name']}}" data-tacoshop_address="{{tacoshop['address']}}" data-nearby_brewery="{{brewery_name}}">Favorite</button>
 
         <div class="row">
           <div class="column">    

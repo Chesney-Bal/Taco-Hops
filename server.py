@@ -111,11 +111,18 @@ def trip_planner():
 @app.route('/user_profile')
 def user_profile():
     """Returns a page that has user profile info on it"""
-    
-    user=session["user_email"]
 
+    if 'user_email' in session:     #if logged in-they can favorite things- 
+        user_email=session["user_email"]
+    else:
+        user_email= None            #if not-logged in they can't favorite things
+        flash ("Must be logged in to use see user profile page.") 
+
+    user_id=crud.get_user_id_by_email(user_email)
+
+    fav_breweries=crud.get_favorites_by_user_id(user_id)
     
-    return render_template('user_details.html', user=user)
+    return render_template('user_details.html', user_email=user_email, fav_breweries=fav_breweries)
 
 #route for page display brewery's found and map
 @app.route('/brewery_trip_planner/search')
@@ -169,15 +176,11 @@ def favorite_brewery():
     if is_created:
         return "Success", 201
 
-    # flash("Brewery Added to Favorites Succesfully!") flashing on search page not brewery results page
-    
+        
     #return Success goes to response in javascript fetch
     return "Failure" , 409
 
         
-
-
-
 #route for page dispaly taco shops found near brewery and map
 @app.route('/taco')
 def tacoshops_nearby():
@@ -186,7 +189,7 @@ def tacoshops_nearby():
     lat=request.args.get("lat")
     long=request.args.get("long")
 
-    name=request.args.get("name")
+    brewery_name=request.args.get("name")
 
     url ='https://api.yelp.com/v3/businesses/search' 
     headers = {'Authorization': 'Bearer '+API_KEY
@@ -209,7 +212,36 @@ def tacoshops_nearby():
         tacoshop['address']=address
 
 
-    return render_template('tacoshops_nearby.html', tacoshops=tacoshops, name=name, taco_map_center=taco_map_center )
+    return render_template('tacoshops_nearby.html', tacoshops=tacoshops, brewery_name=brewery_name, taco_map_center=taco_map_center )
+
+
+@app.route('/fav_tacoshop', methods=['POST'])
+def favorite_tacoshop():
+    """user can click on button to save favorite tacoshop when logged in"""
+
+    if 'user_email' in session:     #if logged in-they can favorite things- 
+        user_email=session["user_email"]
+    else:
+        user_email= None            #if not-logged in they can't favorite things
+        flash ("Must be logged in to use Favorites Feature") 
+
+    user_id=crud.get_user_id_by_email(user_email)
+
+    tacoshop_id=request.json['tacoshop_id']
+    tacoshop_name=request.json['tacoshop_name']
+    tacoshop_address=request.json['tacoshop_address']
+    is_fav_tacoshop=True
+    nearby_brewery=request.json['nearby_brewery']
+
+    is_fav_tacoshop_created = crud.add_fav_tacoshop (user_id, tacoshop_id, tacoshop_name, tacoshop_address, is_fav_tacoshop, nearby_brewery)
+
+    if is_fav_tacoshop_created:
+        return "Success", 201
+
+        
+    #return Success goes to response in javascript fetch
+    return "Failure" , 409
+
 
 
 @app.route('/goodbye')

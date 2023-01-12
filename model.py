@@ -41,12 +41,14 @@ class Fav_Tacoshop(db.Model):
     """A Tacoshop."""
     __tablename__ ="tacoshops"
 
-    tacoshop_id = db.Column(db.String, primary_key=True) #come from yelp API bussiness[id]
+    user_fav_tacoshop_id=db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tacoshop_id = db.Column(db.String) #come from yelp API bussiness[id]
     tacoshop_name=db.Column(db.String(50)) #businesses['name']
     tacoshop_address=db.Column(db.String(250))
-    favorite_tacoshop=db.Column(db.Boolean(True))
+    is_fav_tacoshop=db.Column(db.Boolean(True))
+    nearby_brewery=db.Column(db.String)
 
-    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user=db.relationship("User", back_populates="fav_tacoshops")
 

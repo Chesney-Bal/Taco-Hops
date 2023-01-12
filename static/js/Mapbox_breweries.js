@@ -41,11 +41,10 @@ for (const brewery of brewery_marker_list) {
 
 
 
-
 //get brewery_id from button id on favorite button in html
 const brewery_fav_buttons = document.querySelectorAll('#fav_brewery_btn');
 
-// loops over all buttons on results page so they behave the same
+// loops over all buttons on brewery results page so they behave the same
 for (const brewery_fav_button of brewery_fav_buttons) {
   const brewery_id = brewery_fav_button.dataset.brewery_id
   const brewery_name=brewery_fav_button.dataset.name
@@ -73,17 +72,16 @@ for (const brewery_fav_button of brewery_fav_buttons) {
     fetch (url, request_data ) //sending brewery_id plus other info to server to create brewery record
       .then ((response) => response.text()) //returns Success from server.py route
       .then((status) => {
-          if (status == "Success"){ 
-            console.log(status)
-            brewery_fav_button.innerHTML = "My Fave"; //updating Favorite button once response received
-            brewery_fav_button.disabled = true; //makes it so user can't favorite that brewery again-should gray out button
-          }
-          else{
-            alert("You've already favorited this brewery!")
-            console.log("Brewery already favorited")
-          }
-          })
-        
+        if (status == "Success"){ 
+          console.log(status)
+          brewery_fav_button.innerHTML = "My Fave"; //updating Favorite button once response received
+          brewery_fav_button.disabled = true; //makes it so user can't favorite that brewery again-should gray out button
+        }
+        else {
+          alert("You've already favorited this brewery!")
+          console.log("Brewery already favorited")
+        }
+      }) 
   });
 };
 

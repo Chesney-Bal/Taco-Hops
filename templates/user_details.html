@@ -9,26 +9,31 @@
 </div>
 
 <div class ="container">
- <h2>USER'S Taco Hop Profile</h2>
+ <h2>Taco Hop Profile for: {{user_email}}</h2>
 </div>
 
 
 <div class = "container">
     <div class="row">
-        <h5>USER'S Information</h5>
+        <h5>Profile Information</h5>
         <ul class="user_details">
-            <li> USER EMAIL: {{user}} </li>
+            <li> USER EMAIL: {{user_email}} </li>
 
         </ul>
     </div>
 
     <div class="row">
         <h5> USER'S Favorites</h5>
-        <ul id="favorite_breweries">
-            <li>ITEM 1</li>
-            <li>ITEM 2</li>
-            <li>ITEM 3 </li>
-        </ul>
+        {% for fav_brewery in fav_breweries %}
+            <ul id="favorite_breweries">
+                <li>{{fav_brewery['brewery_name']}}</li>
+                <ul id="fav_brewery_address">
+                    <li>{{fav_brewery['brewery_address']}}</li>
+                    <ul id="near_by_fav_tacoshops"></ul>
+                        <li>ADD TACOSHOPS HERE</li>
+                </ul>
+            </ul>
+        {% endfor %}
     </div>
 
 </div>
