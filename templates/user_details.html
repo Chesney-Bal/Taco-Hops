@@ -2,38 +2,73 @@
 
 {% block title %}User Profile{% endblock %}
 
+{% block head %}
+<meta charset="utf-8">
+
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+
+{% endblock %}
+
 {% block body %}
+
+<div class ="container">
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 10; bottom: 1; right: 0; left: 10; width: 50%; height: 70%; }
+    </style>
+
+    <div id="map"></div>
+
+    <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
+</div>
 
 <div class="container">
     <a href="/brewery_trip_planner">Return To Trip Planner</a>
 </div>
 
 <div class ="container">
- <h2>Taco Hop Profile for: {{user_email}}</h2>
+ <h2>Your Taco Hop Profile</h2>
 </div>
 
 
 <div class = "container">
     <div class="row">
-        <h5>Profile Information</h5>
+        <h4><u>Profile Information</u></h4>
         <ul class="user_details">
-            <li> USER EMAIL: {{user_email}} </li>
+            <li> <strong> User email: </strong> {{user_email}} </li>
 
         </ul>
     </div>
 
     <div class="row">
-        <h5> USER'S Favorites</h5>
+        <h5> <u>Your Favorite Breweries:</u></h5>
         {% for fav_brewery in fav_breweries %}
             <ul id="favorite_breweries">
-                <li>{{fav_brewery['brewery_name']}}</li>
+                <li><strong>{{fav_brewery['brewery_name']}}</strong></li>
+                <li>ADD BREWERY IMAGE HERE</li>
                 <ul id="fav_brewery_address">
                     <li>{{fav_brewery['brewery_address']}}</li>
-                    <ul id="near_by_fav_tacoshops"></ul>
-                        <li>ADD TACOSHOPS HERE</li>
+                    <li>ADD LINK TO BREWERY URL YELP! Learn more here.</a></li>
                 </ul>
             </ul>
         {% endfor %}
+
+        <h5> <u>Your Favorite Tacoshops:</u></h5>        
+        {% for fav_tacoshop in fav_tacoshops %}        
+            <ul id="near_by_fav_tacoshops">
+                <li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
+                    <ul id="fav_tacoshop_address">
+                        <li>{{fav_tacoshop['tacoshop_address']}}</li>
+                    </ul>
+                    <ul id="fav_tacoshop_brewery_nearby">
+                        <li>{{fav_tacoshop['tacoshop_name']}} is near <strong>{{fav_tacoshop['nearby_brewery']}}</strong></li>
+                    </ul>
+            </ul>
+        {% endfor %}
+
     </div>
 
 </div>

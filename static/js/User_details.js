@@ -1,11 +1,18 @@
 'use strict';
 
-//get element id for users favorite breweries on user_detail page
-const list_fav_breweries = document.querySelectorAll('#favorite_breweries');
+//information to center the map based on users location
+const center_coordinates=document.querySelector("#map_center")
+const center_lat=center_coordinates.dataset.lat; 
+const center_long=center_coordinates.dataset.long; 
 
-//should make call to Fav_brewery db and
-//display the breweries that have been favorited and added to db
-// as a list on the user_details page
-//each brewery should display the name, address
-//should there be a function on crud
-//should create a route in server.py
+//establishes map on page
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
+const map = new mapboxgl.Map({
+  container: 'map', // container ID
+  style: 'mapbox://styles/mapbox/streets-v12', // style URL
+  center: [center_long, center_lat],
+  zoom: 12 // starting zoom
+});
+
+map.addControl(new mapboxgl.NavigationControl());
+

@@ -121,8 +121,10 @@ def user_profile():
     user_id=crud.get_user_id_by_email(user_email)
 
     fav_breweries=crud.get_favorites_by_user_id(user_id)
+
+    fav_tacoshops=crud.get_fav_tacoshop_by_user_id(user_id)
     
-    return render_template('user_details.html', user_email=user_email, fav_breweries=fav_breweries)
+    return render_template('user_details.html', user_email=user_email, fav_breweries=fav_breweries, fav_tacoshops=fav_tacoshops)
 
 #route for page display brewery's found and map
 @app.route('/brewery_trip_planner/search')

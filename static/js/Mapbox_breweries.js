@@ -1,10 +1,12 @@
 'use strict';
-
+//MAP FEATURE//
 //information to center the map based on original search term location
 const center_coordinates=document.querySelector("#map_center")
 const center_lat=center_coordinates.dataset.lat; 
 const center_long=center_coordinates.dataset.long; 
 
+
+//establishes map on page
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
 const map = new mapboxgl.Map({
   container: 'map', // container ID
@@ -14,6 +16,7 @@ const map = new mapboxgl.Map({
 });
 
 map.addControl(new mapboxgl.NavigationControl());
+
 
 //pulls name, longitude, latitude from html for use with markers
 const coordinates=document.querySelectorAll(".coordinates")
@@ -33,14 +36,17 @@ for (const brewery of brewery_marker_list) {
       let marker= new mapboxgl.Marker({
         color: '#FFD700',
         }).setLngLat([brewery[1], brewery[2]])
-        .setPopup(new mapboxgl.Popup().setHTML(brewery[0]))
+        .setPopup(new mapboxgl.Popup({
+          closeButton:false,
+          closeOnClick: true,
+        }).setHTML(brewery[0]))
         .addTo(map); 
   };   
+//END OF MAP FEATURE//
 
 
 
-
-
+//FAVORITE FEATURE//
 //get brewery_id from button id on favorite button in html
 const brewery_fav_buttons = document.querySelectorAll('#fav_brewery_btn');
 

@@ -1,12 +1,12 @@
 'use strict';
-
+//MAP FEATURE//
 //information to center the map based on selected brewery
 const tacoshop_center_coordinates=document.querySelector("#taco_map_center")
 const center_lat=tacoshop_center_coordinates.dataset.lat; 
 const center_long=tacoshop_center_coordinates.dataset.long; 
 
-console.log(center_long, center_lat)
 
+//establishes map on page
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlc25leWJhbCIsImEiOiJjbGMwdXY3eWg0Z2liM3hsY2Uwcm5jcWpwIn0.B2XNvVgPluaaVx9aR3miqw';
 const map = new mapboxgl.Map({
   container: 'map', // container ID
@@ -36,11 +36,17 @@ for (const tacoshop of tacoshop_marker_list) {
       let marker= new mapboxgl.Marker({
         color: '#A13D2D',
         }).setLngLat([tacoshop[1], tacoshop[2]])
-        .setPopup(new mapboxgl.Popup().setHTML(tacoshop[0]))
+        .setPopup(new mapboxgl.Popup({
+          closeButton:false,
+          closeOnClick: true,
+        }).setHTML(tacoshop[0]))
         .addTo(map); 
   };   
+//END OF MAP FEATURE//
 
 
+
+//FAVORITE FEATURE//
 //get tacoshop_id from button id on favorite button in html
 const tacoshop_fav_buttons = document.querySelectorAll('#fav_tacoshop_btn');
 

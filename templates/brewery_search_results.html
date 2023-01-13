@@ -26,7 +26,8 @@
     </div>
 
     <div class="container">
-      <h2>Taco Hop Breweries near {{location}}:</h2>
+      <h1>Taco Hop</h1>
+      <h2>Breweries near {{location}}:</h2>
 
       {% for brewery in breweries %}
       <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}" >
