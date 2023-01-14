@@ -39,7 +39,7 @@ def get_user_id_by_email (email):
     return User.query.filter_by(email = email).first().user_id
 
 
-def add_fav_brewery(user_id, brewery_id, name, address, is_favorite):
+def add_fav_brewery(user_id, brewery_id, name, address, is_favorite, brewery_long, brewery_lat, brewery_image_url, brewery_url):
     """Creates a favorite brewery in Fav_Brewery Databse"""
     favorite=Fav_Brewery.query.filter((Fav_Brewery.brewery_id==brewery_id) & (Fav_Brewery.user_id==user_id)).first()
     if not favorite:
@@ -51,6 +51,10 @@ def add_fav_brewery(user_id, brewery_id, name, address, is_favorite):
             brewery_name=name,  #brewery_name naming convention is from db
             brewery_address=address,
             is_favorite=is_favorite,
+            brewery_long=brewery_long,
+            brewery_lat=brewery_lat,
+            brewery_image_url=brewery_image_url,
+            brewery_url=brewery_url,
         )
 
         db.session.add(brewery)

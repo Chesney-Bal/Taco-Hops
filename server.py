@@ -172,8 +172,12 @@ def favorite_brewery():
     name=request.json['brewery_name']
     address=request.json['brewery_address']
     is_favorite=True
+    brewery_long=request.json['brewery_long']
+    brewery_lat=request.json['brewery_lat']
+    brewery_image_url=request.json['brewery_image_url']
+    brewery_url=request.json['brewery_url']
 
-    is_created = crud.add_fav_brewery (user_id, brewery_id, name, address, is_favorite)
+    is_created = crud.add_fav_brewery (user_id, brewery_id, name, address, is_favorite, brewery_long=brewery_long, brewery_lat=brewery_lat, brewery_image_url=brewery_image_url, brewery_url=brewery_url)
 
     if is_created:
         return "Success", 201

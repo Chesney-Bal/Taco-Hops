@@ -29,6 +29,10 @@ class Fav_Brewery(db.Model):
     brewery_name=db.Column(db.String(50)) #businesses['name']
     brewery_address=db.Column(db.String(250))
     is_favorite=db.Column(db.Boolean(True)) #when an instnace is made should default be True since instances only made when brewery is being favorited?
+    brewery_long=db.Column(db.String)
+    brewery_lat=db.Column(db.String)
+    brewery_url=db.Column(db.String)
+    brewery_image_url=db.Column(db.String)
 
     user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     

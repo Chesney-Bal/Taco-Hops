@@ -44,7 +44,7 @@
                   <h5 class="card-title">{{brewery['name']}}</h5>
                   <p class="card-text"><a href="{{brewery['url']}}" target="_blank">Visit Yelp to Learn More</a></p><p>{{brewery['address']}}</p>
                   <p> <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" class="btn btn-primary">Taco Shops Near By</a>
-                  <button class="btn btn-primary" id="fav_brewery_btn" data-brewery_id="{{brewery['id']}}" data-name="{{brewery['name']}}" data-address="{{brewery['address']}}">Favorite</button></p>
+                  <button class="btn btn-primary" id="fav_brewery_btn" data-brewery_id="{{brewery['id']}}" data-brewery_name="{{brewery['name']}}" data-brewery_address="{{brewery['address']}}" data-brewery_long="{{brewery['coordinates']['longitude']}}" data-brewery_lat="{{brewery['coordinates']['latitude']}}" data-brewery_image_url="{{brewery['image_url']}}" data-brewery_url="{{brewery['url']}}">Favorite</button></p>
                 </div>
             </div>
           </div> 

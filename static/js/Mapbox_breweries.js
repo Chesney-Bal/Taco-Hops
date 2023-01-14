@@ -53,13 +53,22 @@ const brewery_fav_buttons = document.querySelectorAll('#fav_brewery_btn');
 // loops over all buttons on brewery results page so they behave the same
 for (const brewery_fav_button of brewery_fav_buttons) {
   const brewery_id = brewery_fav_button.dataset.brewery_id
-  const brewery_name=brewery_fav_button.dataset.name
-  const brewery_address=brewery_fav_button.dataset.address
-  
+  const brewery_name=brewery_fav_button.dataset.brewery_name
+  const brewery_address=brewery_fav_button.dataset.brewery_address
+  const brewery_long=brewery_fav_button.dataset.brewery_long
+  const brewery_lat=brewery_fav_button.dataset.brewery_lat
+  const brewery_image_url=brewery_fav_button.dataset.brewery_image_url
+  const brewery_url=brewery_fav_button.dataset.brewery_url
+
+
   const brewery_data={
     brewery_id: brewery_id,
     brewery_name: brewery_name,
     brewery_address: brewery_address,  
+    brewery_long: brewery_long,
+    brewery_lat: brewery_lat,
+    brewery_image_url:brewery_image_url,
+    brewery_url:brewery_url,
   }
   
   const request_data={
