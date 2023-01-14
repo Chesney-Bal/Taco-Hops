@@ -10,67 +10,72 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 
+<style>
+    div.sticky { 
+      position: -webkit-sticky;
+      position: sticky; 
+      top: 0; 
+      padding: 5px solid;
+      border: 2px solid;
+      width:600px;
+      height: 500px;
+     }
+</style>
 {% endblock %}
 
 {% block body %}
+<div class ="container"> 
 
-<div class ="container">
-    <style>
-      body { margin: 0; padding: 0; }
-      #map { position: absolute; top: 10; bottom: 1; right: 0; left: 10; width: 50%; height: 70%; }
-    </style>
+  <div class="container">
+    <h1>Your Taco Hop Profile</h1>
+  </div>
 
-    <div id="map"></div>
-
-    <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
-</div>
-
-<div class="container">
+  <div class="container">
     <a href="/brewery_trip_planner">Return To Trip Planner</a>
 </div>
 
-<div class ="container">
- <h2>Your Taco Hop Profile</h2>
+<div class="row">
+  <h2><u>Profile Information</u></h2>
+    <ul class="user_details">
+      <li> <strong> User email: </strong> {{user_email}} </li>
+    </ul>
 </div>
 
+<h3> <u>Your Favorite Breweries:</u></h3>
 
-<div class = "container">
-    <div class="row">
-        <h4><u>Profile Information</u></h4>
-        <ul class="user_details">
-            <li> <strong> User email: </strong> {{user_email}} </li>
-
-        </ul>
-    </div>
-
-    <div class="row">
-        <h5> <u>Your Favorite Breweries:</u></h5>
+    <div class ="row">
+    <div class="col-sm-6">
         {% for fav_brewery in fav_breweries %}
-            <ul id="favorite_breweries">
-                <li><strong>{{fav_brewery['brewery_name']}}</strong></li>
-                <li>ADD BREWERY IMAGE HERE</li>
-                <ul id="fav_brewery_address">
-                    <li>{{fav_brewery['brewery_address']}}</li>
-                    <li>ADD LINK TO BREWERY URL YELP! Learn more here.</a></li>
-                </ul>
-            </ul>
-        {% endfor %}
-
-        <h5> <u>Your Favorite Tacoshops:</u></h5>        
-        {% for fav_tacoshop in fav_tacoshops %}        
-            <ul id="near_by_fav_tacoshops">
-                <li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
-                    <ul id="fav_tacoshop_address">
-                        <li>{{fav_tacoshop['tacoshop_address']}}</li>
+        <div class="fav_brewery_coordinates" data-fav_brewery_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_lat="" data-fav_brewery_long="">
+        <div class="card" style="width: 25rem;" id="favorite_breweries">
+            <img class="card-img-top" src="" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
+                <p class="card-text"><a href="" target="_blank">ADD LINK TO href-Visit Yelp to Learn More</a></p><p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
+                <h6>Favorite Tacoshops Nearby</h6>
+                {% for fav_tacoshop in fav_tacoshops %}
+                    {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
+                    <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
+                    <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
                     </ul>
-                    <ul id="fav_tacoshop_brewery_nearby">
-                        <li>{{fav_tacoshop['tacoshop_name']}} is near <strong>{{fav_tacoshop['nearby_brewery']}}</strong></li>
-                    </ul>
-            </ul>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        </div>
         {% endfor %}
+    </div>  
 
+    <div class="col-sm-6">
+        <div class="sticky"> 
+        <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
+
+        <div id="map"></div>
+
+        <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
+        </div>
     </div>
-
+    </div>
 </div>
 {% endblock %}
 

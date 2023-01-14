@@ -89,13 +89,13 @@ def get_favorites_by_user_id(user_id):
      #change function name to get_fav_brewery_by_user_id
      #confirm naming update across project
 
-    return Fav_Brewery.query.filter_by(user_id=user_id).all()
+    return Fav_Brewery.query.filter_by(user_id=user_id).order_by(Fav_Brewery.brewery_name).all()
 
 def get_fav_tacoshop_by_user_id(user_id):
     """returns favorite tacoshops by user_id"""
 
 
-    return Fav_Tacoshop.query.filter_by(user_id=user_id).all()
+    return Fav_Tacoshop.query.filter_by(user_id=user_id).order_by(Fav_Tacoshop.tacoshop_name).all()
 
 if __name__=="__main__":
     from server import app

@@ -43,3 +43,35 @@
 
 {% endblock %}
 
+{% for brewery in breweries %}
+
+<div class="row">
+  <div class="col-6">
+    <ul class="brewery-results"></ul>
+    <li><a href="{{brewery['url']}}" target="_blank">
+      {{brewery['name']}} </a></li>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="col-5">
+    <img src="{{brewery['image_url']}}" width="200">
+  </div>
+</div>
+
+<button id="fav_brewery_btn" data-brewery_id="{{brewery['id']}}" data-name="{{brewery['name']}}" data-address="{{brewery['address']}}">Favorite</button>
+
+  <div class="row">
+    <div class="column">    
+      <p>See What Taco Shops are nearby:</p> 
+        <p>
+          <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" >
+          {{brewery['address']}}
+          </a> 
+        </p>
+    </div>
+  </div>
+
+
+{% endfor %}
+
