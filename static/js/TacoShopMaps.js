@@ -75,13 +75,12 @@ for (const tacoshop_fav_button of tacoshop_fav_buttons) {
   //create event listener for favorite button in tachoshop_results.html
   tacoshop_fav_button.addEventListener('click', () =>{
     const url = `/fav_tacoshop`;
-    console.log (url)
+
 
     fetch (url, request_tacoshop_data) //sending tacoshop_id plus other info to server to create tacoshop record
       .then((response) => response.text()) //returns Success from server.py route
       .then((status) => {
         if (status == "Success") {
-          console.log ("#########################Did Success make it back?")
           tacoshop_fav_button.innerHTML = "My Fave"; //updates Favorite button once response received
           tacoshop_fav_button.disabled = true; //makes it so user can't favorite that brewery right then
         }

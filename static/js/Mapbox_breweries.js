@@ -82,13 +82,12 @@ for (const brewery_fav_button of brewery_fav_buttons) {
   //create event listener for favorite button in brewery_search_retults.html
   brewery_fav_button.addEventListener('click', () =>{
     const url = `/fav_brewery`;
-    console.log(url)
+
   
     fetch (url, request_data ) //sending brewery_id plus other info to server to create brewery record
       .then ((response) => response.text()) //returns Success from server.py route
       .then((status) => {
         if (status == "Success"){ 
-          console.log(status)
           brewery_fav_button.innerHTML = "My Fave"; //updating Favorite button once response received
           brewery_fav_button.disabled = true; //makes it so user can't favorite that brewery again-should gray out button
         }

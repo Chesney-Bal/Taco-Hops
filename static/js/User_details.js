@@ -24,16 +24,12 @@ const fav_B_marker_list=[]
 
 //adds information to fav_B_marker_list to be used by markers
 for (const fav_B_coordinate of fav_B_coordinates) {
-  const fav_brewery_name=fav_B_coordinate.dataset.favName;
+  const fav_brewery_name=fav_B_coordinate.dataset.fav_name;
   const fav_brewery_long=fav_B_coordinate.dataset.fav_brewery_long;
   const fav_brewery_lat=fav_B_coordinate.dataset.fav_brewery_lat;
   fav_B_marker_list.push([fav_brewery_name, fav_brewery_long, fav_brewery_lat]);
 };
 
-//printing undefined even after tried convertin to String()
-//jinja in users_details.html accurately displaying string on website
-//this is impacting info on the marker popup
-console.log(fav_B_marker_list[0][0]) 
 
 //creates markers on the map with fav_brewery name
 for (const fav_brewery of fav_B_marker_list) {

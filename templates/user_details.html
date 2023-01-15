@@ -46,15 +46,17 @@
     <div class ="row">
     <div class="col-sm-6">
         {% for fav_brewery in fav_breweries %}
-        <div class="fav_brewery_info" data-favName="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
+        <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
         <div class="card" style="width: 25rem;" id="favorite_breweries">
             <img class="card-img-top" src="{{fav_brewery['brewery_image_url']}}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{fav_brewery['brewery_name']}}  {{fav_brewery['brewery_long']}}</h5>
+                <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
                 <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p><p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
-                <h6>Favorite Taco Shop(s) near <p><u>{{fav_brewery['brewery_name']}}:</u></p></h6>
+                <h6>Favorited Taco Shop(s):</h6>
+                <ul><li><a href="/taco">Check out more nearby taco shops!</a></li></ul>
                 {% for fav_tacoshop in fav_tacoshops %}
                   {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
+
                     <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
                     <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
                     </ul>

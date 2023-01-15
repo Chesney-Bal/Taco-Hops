@@ -40,7 +40,6 @@ def verify_age():
         return redirect('/homepage')
 
 
-
     #if not 21- user gets redirected to goodbye page
     return redirect('/goodbye')
 
@@ -112,10 +111,10 @@ def trip_planner():
 def user_profile():
     """Returns a page that has user profile info on it"""
 
-    if 'user_email' in session:     #if logged in-they can favorite things- 
+    if 'user_email' in session:     #if logged in-user can favorite things- 
         user_email=session["user_email"]
     else:
-        user_email= None            #if not-logged in they can't favorite things
+        user_email= None            #if not-logged in user can't favorite things
         flash ("Must be logged in to use see user profile page.") 
 
     user_id=crud.get_user_id_by_email(user_email)
@@ -147,6 +146,7 @@ def search_for_brewery():
     response = requests.get(url, headers=headers, params=payload)
     brewery_results=response.json()
     breweries=brewery_results['businesses']
+    ##???can I re order brewery results?
     center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude']]
 
     for brewery in breweries:
@@ -160,10 +160,10 @@ def search_for_brewery():
 def favorite_brewery():
     """user can click on button to save favorite brewery when logged in"""
 
-    if 'user_email' in session:     #if logged in-they can favorite things- 
+    if 'user_email' in session:     #if logged in-user can favorite things- 
         user_email=session["user_email"]
     else:
-        user_email= None            #if not-logged in they can't favorite things
+        user_email= None            #if not-logged in user can't favorite things
         flash ("Must be logged in to use Favorites Feature") 
 
     user_id=crud.get_user_id_by_email(user_email)
@@ -212,6 +212,7 @@ def tacoshops_nearby():
     response = requests.get(url, headers=headers, params=payload)
     tacoshop_results=response.json()
     tacoshops=tacoshop_results['businesses']
+    ##???can I re order tacoshop results?
 
     for tacoshop in tacoshops:
         address=" ".join(tacoshop['location']['display_address'])
@@ -225,10 +226,10 @@ def tacoshops_nearby():
 def favorite_tacoshop():
     """user can click on button to save favorite tacoshop when logged in"""
 
-    if 'user_email' in session:     #if logged in-they can favorite things- 
+    if 'user_email' in session:     #if logged in-user can favorite things- 
         user_email=session["user_email"]
     else:
-        user_email= None            #if not-logged in they can't favorite things
+        user_email= None            #if not-logged in user can't favorite things
         flash ("Must be logged in to use Favorites Feature") 
 
     user_id=crud.get_user_id_by_email(user_email)
