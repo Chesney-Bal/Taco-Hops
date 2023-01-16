@@ -31,8 +31,23 @@ def verify_age_page():
 @app.route('/', methods=['POST'])
 def verify_age():
     """takes users DOB and verifies if they are 21 or over"""
+
     birthDate=request.form['birthDate']
+    if not birthDate:
+        flash('Please enter full DOB mm/dd/yyyy.')
+        return redirect('/')
+
+
+    # location = request.args.get('location')
+    # if not location:
+    #     flash('Location required!')
+    #     return redirect('/brewery_trip_planner')
+
     birthDate_object=datetime.strptime(birthDate, '%Y-%m-%d').date()
+
+    if not birthDate_object:
+        flash("Please enter a birthdate to proceed.")
+
 
     #verifies age and only lets 21 and over get to homepage.html
     if crud.are_you_21(birthDate_object) is True:
