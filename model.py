@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 """Establish Classes"""
-
 class User(db.Model):
     """A user."""
     __tablename__ ="users"
@@ -20,6 +19,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
 
+
 class Fav_Brewery(db.Model):
     """A brewery."""
     __tablename__ ="breweries"
@@ -28,7 +28,7 @@ class Fav_Brewery(db.Model):
     brewery_id = db.Column(db.String) #come from yelp API bussiness[id]
     brewery_name=db.Column(db.String(50)) #businesses['name']
     brewery_address=db.Column(db.String(250))
-    is_favorite=db.Column(db.Boolean(True)) #when an instnace is made should default be True since instances only made when brewery is being favorited?
+    is_favorite=db.Column(db.Boolean(True)) 
     brewery_long=db.Column(db.String)
     brewery_lat=db.Column(db.String)
     brewery_url=db.Column(db.String)
@@ -40,6 +40,7 @@ class Fav_Brewery(db.Model):
 
     def __repr__(self):
         return f'<Brewery brewery_id={self.brewery_id} brewery_name={self.brewery_name}>'    
+
 
 class Fav_Tacoshop(db.Model):
     """A Tacoshop."""

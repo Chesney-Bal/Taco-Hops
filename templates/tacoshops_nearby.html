@@ -43,7 +43,9 @@
                 <div class="card-body">
                   <h5 class="card-title">{{tacoshop['name']}}</h5>
                   <p class="card-text"><a href="{{tacoshop['url']}}" target="_blank">Visit Yelp to Learn More</a></p><p>{{tacoshop['address']}}</p>
-                  <button class="btn btn-primary" id="fav_tacoshop_btn" data-tacoshop_id="{{tacoshop['id']}}" data-tacoshop_name="{{tacoshop['name']}}" data-tacoshop_address="{{tacoshop['address']}}" data-nearby_brewery="{{brewery_name}}">Favorite</button></p>
+                  {% if session.get('user_email') %}
+                    <button class="btn btn-primary" id="fav_tacoshop_btn" data-tacoshop_id="{{tacoshop['id']}}" data-tacoshop_name="{{tacoshop['name']}}" data-tacoshop_address="{{tacoshop['address']}}" data-nearby_brewery="{{brewery_name}}">Favorite</button></p>
+                  {% endif %}
                 </div>
             </div>
           </div>
@@ -56,7 +58,7 @@
 
         <div id="map"></div>
 
-        <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}"></div>
+        <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}" data-nearby_brewery_name="{{brewery_name}}"></div>
       </div>
     </div>
   </div>

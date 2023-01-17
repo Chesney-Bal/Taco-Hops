@@ -52,16 +52,15 @@
             <div class="card-body">
                 <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
                 <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p><p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
-                <h6>Favorited Taco Shop(s):</h6>
-                <ul><li><a href="/taco">Check out more nearby taco shops!</a></li></ul>
-                {% for fav_tacoshop in fav_tacoshops %}
-                  {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
-
-                    <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
-                    <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
-                    </ul>
-                    {% endif %}
-                {% endfor %}
+                <h6>Favorited Taco Shop(s):</h6>                
+                  {% for fav_tacoshop in fav_tacoshops %}
+                    {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
+                      <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
+                      <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
+                      </ul>
+                      {% endif %}
+                  {% endfor %}
+                <p> <a href="/taco?lat={{fav_brewery['brewery_lat']}}&long={{fav_brewery['brewery_long']}}&name={{fav_brewery['brewery_name']}}" target="_blank" method="post" class="btn btn-primary">Explore more nearby taco shops!</a>
             </div>
         </div>
         </div>

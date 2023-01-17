@@ -4,6 +4,7 @@
 const tacoshop_center_coordinates=document.querySelector("#taco_map_center")
 const center_lat=tacoshop_center_coordinates.dataset.lat; 
 const center_long=tacoshop_center_coordinates.dataset.long; 
+const center_brewery_name=tacoshop_center_coordinates.dataset.nearby_brewery_name;
 
 
 //establishes map on page
@@ -12,8 +13,17 @@ const map = new mapboxgl.Map({
   container: 'map', // container ID
   style: 'mapbox://styles/mapbox/streets-v12', // style URL
   center: [center_long, center_lat],
-  zoom: 12 // starting zoom
+  zoom: 12 // starting zoom  
 });
+
+const center = new mapboxgl.Marker({
+  color: '#FFD700',
+}) .setLngLat([center_long, center_lat])
+.setPopup(new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: true,
+}).setHTML(center_brewery_name))
+.addTo(map);
 
 map.addControl(new mapboxgl.NavigationControl());
 

@@ -17,6 +17,26 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl());
 
+// Add geolocate control to the map.
+//Initialize the Geolocate Control
+  const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+          enableHighAccuracy: true
+      },
+      // When active the map will receive updates to the device's location as it changes.
+      trackUserLocation: true,
+      // Draw an arrow next to the location dot to indicate which direction the device is heading.
+      showUserHeading: true,
+      showUserLocation: true,
+  });
+
+  //adds geolocation feature on map
+  map.addControl(geolocate);
+  geolocate.on('geolocate', () => {
+  })
+
+
+
 //pulls name, and coordinates from html for use with markers
 const fav_B_coordinates=document.querySelectorAll(".fav_brewery_info")
 
@@ -43,4 +63,15 @@ for (const fav_brewery of fav_B_marker_list) {
   .addTo(map);
   };
   
-
+//create a popup
+const popup = new mapboxgl.Popup();
+//Set event listener that will fire when mouse hovers over location info
+//any time the popup us opened
+popup.on('open',() => {
+  console.log('popup was opened');
+});
+//set event listener that will fire when mouse hover off of location info
+//any time the opoup is closed:
+popup.on('close', () => {
+  console.log('popup was closed');
+});

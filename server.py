@@ -17,7 +17,6 @@ app = Flask(__name__)
 app.secret_key = "TacosBeerTacosBeer"
 app.jinja_env.undefined = StrictUndefined
 API_KEY=environ.get('API_TOKEN')
-G_API_KEY=environ.get('G_API_TOKEN')
 MB_API_TOKEN=environ.get('MB_API_TOKEN')
 
 
@@ -37,12 +36,6 @@ def verify_age():
         flash('Please enter full DOB mm/dd/yyyy.')
         return redirect('/')
 
-
-    # location = request.args.get('location')
-    # if not location:
-    #     flash('Location required!')
-    #     return redirect('/brewery_trip_planner')
-
     birthDate_object=datetime.strptime(birthDate, '%Y-%m-%d').date()
 
     if not birthDate_object:
@@ -53,7 +46,6 @@ def verify_age():
     if crud.are_you_21(birthDate_object) is True:
         session['is of age']=True
         return redirect('/homepage')
-
 
     #if not 21- user gets redirected to goodbye page
     return redirect('/goodbye')
@@ -91,6 +83,14 @@ def login_user():
         return redirect ('/brewery_trip_planner')
 
 
+@app.route('/logout')
+def logout():
+    """logs user out"""
+    del session["user_email"]
+
+    return redirect('/homepage')
+
+
 #users can create an account with email and password
 @app.route('/create_new_user', methods =["POST"])
 def create_new_user():
@@ -121,16 +121,19 @@ def trip_planner():
 
     return render_template('brewery_trip_planner.html')
 
+
 #user profile page
 @app.route('/user_profile')
 def user_profile():
     """Returns a page that has user profile info on it"""
 
-    if 'user_email' in session:     #if logged in-user can favorite things- 
+    if 'user_email' in session:     #if logged in-user can access user profile page
         user_email=session["user_email"]
+
     else:
-        user_email= None            #if not-logged in user can't favorite things
+        user_email= None            #if not-logged in user can't acces user profile page
         flash ("Must be logged in to use see user profile page.") 
+        return redirect('/brewery_trip_planner')
 
     user_id=crud.get_user_id_by_email(user_email)
 
@@ -139,6 +142,7 @@ def user_profile():
     fav_tacoshops=crud.get_fav_tacoshop_by_user_id(user_id)
     
     return render_template('user_details.html', user_email=user_email, fav_breweries=fav_breweries, fav_tacoshops=fav_tacoshops)
+
 
 #route for page display brewery's found and map
 @app.route('/brewery_trip_planner/search')
@@ -161,7 +165,6 @@ def search_for_brewery():
     response = requests.get(url, headers=headers, params=payload)
     brewery_results=response.json()
     breweries=brewery_results['businesses']
-    ##???can I re order brewery results?
     center=[brewery_results['region']['center']['longitude'], brewery_results['region']['center']['latitude']]
 
     for brewery in breweries:
@@ -175,10 +178,10 @@ def search_for_brewery():
 def favorite_brewery():
     """user can click on button to save favorite brewery when logged in"""
 
-    if 'user_email' in session:     #if logged in-user can favorite things- 
+    if 'user_email' in session:     
         user_email=session["user_email"]
     else:
-        user_email= None            #if not-logged in user can't favorite things
+        user_email= None            
         flash ("Must be logged in to use Favorites Feature") 
 
     user_id=crud.get_user_id_by_email(user_email)
@@ -196,7 +199,6 @@ def favorite_brewery():
 
     if is_created:
         return "Success", 201
-
         
     #return Success goes to response in javascript fetch
     return "Failure" , 409
@@ -223,16 +225,13 @@ def tacoshops_nearby():
 
     taco_map_center=[long, lat]
 
-
     response = requests.get(url, headers=headers, params=payload)
     tacoshop_results=response.json()
     tacoshops=tacoshop_results['businesses']
-    ##???can I re order tacoshop results?
 
     for tacoshop in tacoshops:
         address=" ".join(tacoshop['location']['display_address'])
         tacoshop['address']=address
-
 
     return render_template('tacoshops_nearby.html', tacoshops=tacoshops, brewery_name=brewery_name, taco_map_center=taco_map_center )
 
@@ -241,10 +240,10 @@ def tacoshops_nearby():
 def favorite_tacoshop():
     """user can click on button to save favorite tacoshop when logged in"""
 
-    if 'user_email' in session:     #if logged in-user can favorite things- 
+    if 'user_email' in session:     
         user_email=session["user_email"]
     else:
-        user_email= None            #if not-logged in user can't favorite things
+        user_email= None           
         flash ("Must be logged in to use Favorites Feature") 
 
     user_id=crud.get_user_id_by_email(user_email)
@@ -260,10 +259,8 @@ def favorite_tacoshop():
     if is_fav_tacoshop_created:
         return "Success", 201
 
-        
     #return Success goes to response in javascript fetch
     return "Failure" , 409
-
 
 
 @app.route('/goodbye')
@@ -275,63 +272,3 @@ def goodbye_page():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
-
-
-    ##example of returned infor from yelp api
-    # {
-#   "businesses": [
-#     {
-#       "alias": "golden-boy-pizza-hamburg",
-#       "categories": [
-#         {
-#           "alias": "pizza",
-#           "title": "Pizza"
-#         },
-#         {
-#           "alias": "food",
-#           "title": "Food"
-#         }
-#       ],
-#       "coordinates": {
-#         "latitude": 41.7873382568359,
-#         "longitude": -123.051551818848
-#       },
-#       "display_phone": "(415) 982-9738",
-#       "distance": 4992.437696561071,
-#       "id": "QPOI0dYeAl3U8iPM_IYWnA",
-#       "image_url": "https://yelp-photos.yelpcorp.com/bphoto/b0mx7p6x9Z1ivb8yzaU3dg/o.jpg",
-#       "is_closed": true,
-#       "location": {
-#         "address1": "Herr",
-#         "address2": "Wesselstraat",
-#         "address3": "68c",
-#         "city": "Hamburg",
-#         "country": "US",
-#         "display_address": [
-#           "Herr",
-#           "Wesselstraat",
-#           "68c",
-#           "Hamburg, CA 22399"
-#         ],
-#         "state": "CA",
-#         "zip_code": "22399"
-#       },
-#       "name": "Golden Boy Pizza",
-#       "phone": "+14159829738",
-#       "price": "$",
-#       "rating": 4,
-#       "review_count": 903,
-#       "transactions": [
-#         "restaurant_reservation"
-#       ],
-#       "url": "https://www.yelp.com/biz/golden-boy-pizza-hamburg?adjust_creative=XsIsNkqpLmHqfJ51zfRn3A&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=XsIsNkqpLmHqfJ51zfRn3A"
-#     }
-#   ],
-#   "region": {
-#     "center": {
-#       "latitude": 37.76089938976322,
-#       "longitude": -122.43644714355469
-#     }
-#   },
-#   "total": 6800
-# }
