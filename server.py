@@ -162,6 +162,8 @@ def search_for_brewery():
                 'location': location
     }
 
+    location=location.title()
+
     response = requests.get(url, headers=headers, params=payload)
     brewery_results=response.json()
     breweries=brewery_results['businesses']

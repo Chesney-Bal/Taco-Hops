@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include 'navBar.html' %}
 
 {% block title %}User Profile{% endblock %}
 
@@ -26,57 +27,56 @@
 {% block body %}
 <div class ="container"> 
 
-  <div class="container">
+  <div class="row">
     <h1>Your Taco Hop Profile</h1>
   </div>
 
-  <div class="container">
-    <a href="/brewery_trip_planner">Return To Trip Planner</a>
-</div>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2><u>Profile Information</u></h2>
+        <ul class="user_details">
+          <li> <strong> User email: </strong> {{user_email}} </li>
+        </ul>
+    </div>
+  </div>
 
-<div class="row">
-  <h2><u>Profile Information</u></h2>
-    <ul class="user_details">
-      <li> <strong> User email: </strong> {{user_email}} </li>
-    </ul>
-</div>
+  <div class="row">
+    <h3> <u>Your Favorite Breweries:</u></h3>
+  </div>
 
-<h3> <u>Your Favorite Breweries:</u></h3>
-
-    <div class ="row">
+  <div class ="row">
     <div class="col-sm-6">
         {% for fav_brewery in fav_breweries %}
-        <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
-        <div class="card" style="width: 25rem;" id="favorite_breweries">
-            <img class="card-img-top" src="{{fav_brewery['brewery_image_url']}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
-                <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p><p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
-                <h6>Favorited Taco Shop(s):</h6>                
-                  {% for fav_tacoshop in fav_tacoshops %}
-                    {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
-                      <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
-                      <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
-                      </ul>
-                      {% endif %}
-                  {% endfor %}
-                <p> <a href="/taco?lat={{fav_brewery['brewery_lat']}}&long={{fav_brewery['brewery_long']}}&name={{fav_brewery['brewery_name']}}" target="_blank" method="post" class="btn btn-primary">Explore more nearby taco shops!</a>
+          <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
+            <div class="card" style="width: 25rem;" id="favorite_breweries">
+              <img class="card-img-top" src="{{fav_brewery['brewery_image_url']}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
+                    <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p><p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
+                      <h6>Favorited Taco Shop(s):</h6>                
+                        {% for fav_tacoshop in fav_tacoshops %}
+                          {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
+                            <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
+                              <ul><li id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</li></ul>
+                            </ul>
+                          {% endif %}
+                        {% endfor %}
+                    <p> <a href="/taco?lat={{fav_brewery['brewery_lat']}}&long={{fav_brewery['brewery_long']}}&name={{fav_brewery['brewery_name']}}" target="_blank" method="post" class="btn btn-primary">Explore more nearby taco shops!</a>
+                </div>
             </div>
-        </div>
-        </div>
+          </div>
         {% endfor %}
     </div>  
 
     <div class="col-sm-6">
-        <div class="sticky"> 
+      <div class="sticky"> 
         <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
-
-        <div id="map"></div>
-
-        <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
-        </div>
+          <div id="map"></div>
+          <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
+      </div>
     </div>
-    </div>
+  </div>
+
 </div>
 {% endblock %}
 

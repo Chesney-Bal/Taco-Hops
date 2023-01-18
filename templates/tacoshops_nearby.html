@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include 'navBar.html' %}
 
 {% block title %}Nearby TacoShop Results{% endblock %}
 
@@ -27,15 +28,18 @@
 {% block body %} 
 <div class ="container"> 
 
-  <div class="container">
-    <h1>Taco Hop</h1>
+  <div class = "row">
+    <div class="col-sm-10">
+      <h1>Taco Shops near {{brewery_name}}:</h1>
+    </div>
+
+    <div class="col-sm-2">
+      <p>Search powered by  <img id="yelp logo" src="/static/img/yelp_logo 49 x 19.png" alt="yelp logo"></p>
+    </div>
   </div>
 
-  <h2> Taco Shops near {{brewery_name}}:</h2>
-
-  <div class = "row">
-    <div class="col-sm-6">
-
+    <div class = "row">
+      <div class="col-sm-6">
         {% for tacoshop in tacoshops %}
           <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}">
             <div class="card" style="width: 25rem;">
@@ -50,18 +54,17 @@
             </div>
           </div>
         {% endfor %}
-    </div>
-
-    <div class="col-sm-6">
-      <div class="sticky"> 
-        <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
-
-        <div id="map"></div>
-
-        <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}" data-nearby_brewery_name="{{brewery_name}}"></div>
       </div>
-    </div>
+
+      <div class="col-sm-6">
+        <div class="sticky"> 
+          <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
+           <div id="map"></div>
+           <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}" data-nearby_brewery_name="{{brewery_name}}"></div>
+        </div>
+      </div>
   </div>
+ 
 </div>  
 {% endblock %}
 
