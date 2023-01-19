@@ -19,6 +19,7 @@
         top: 0; 
         padding: 5px solid;
         border: 2px solid;
+        margin-bottom: 20px;
         width:600px;
         height: 500px;
        }
@@ -40,9 +41,17 @@
 
     <div class = "row">
       <div class="col-sm-6">
+        <div class="sticky"> 
+          <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
+           <div id="map"></div>
+           <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}" data-nearby_brewery_name="{{brewery_name}}"></div>
+        </div>
+      </div>
+
         {% for tacoshop in tacoshops %}
+        <div class="col-sm-2">
           <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}">
-            <div class="card" style="width: 25rem;">
+            <div class="card" style="max-width: 15rem;">
               <img class="card-img-top" src="{{tacoshop['image_url']}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{tacoshop['name']}}</h5>
@@ -53,16 +62,11 @@
                 </div>
             </div>
           </div>
-        {% endfor %}
-      </div>
-
-      <div class="col-sm-6">
-        <div class="sticky"> 
-          <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
-           <div id="map"></div>
-           <div id="taco_map_center" data-long="{{taco_map_center[0]}}" data-lat="{{taco_map_center[1]}}" data-nearby_brewery_name="{{brewery_name}}"></div>
         </div>
-      </div>
+        {% endfor %}
+      
+
+
   </div>
  
 </div>  

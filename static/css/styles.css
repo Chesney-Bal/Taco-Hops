@@ -1,10 +1,10 @@
-body {
+/* body {
   background-color: #d9dadb;
   background-image: linear-gradient(
     rgba(217, 218, 219, 0.8),
     rgba(108, 122, 137, 1)
   )
-}
+} */
 
 .flex-container {
     display: flex;
