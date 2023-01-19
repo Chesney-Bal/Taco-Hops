@@ -3,23 +3,29 @@
 
 {% block title %}Search By Brewery{% endblock %}
 
+<link rel="stylesheet" href="/static/css/styles.css">
+
 {% block body %}
 
 
 <div class="container">
   <div class="row">
+   
       <h2> Plan your Taco Hop</h2>
+
   </div>
 
   <div class="row" id="location-required-msg">
     <div class="col-4">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            {{message}}
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
+      
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              {{message}}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      
     </div>
   </div>
 
@@ -41,6 +47,8 @@
           </div>
       </div>
     </form>
+
+
 
 </div>
 {% endblock %}
