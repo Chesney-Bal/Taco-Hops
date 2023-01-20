@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include 'navBar.html' %}
 <link rel="stylesheet" href="/static/css/styles.css">
 {% block title %}Homepage{% endblock %}
 
@@ -16,18 +17,41 @@
     </div>
   </div>
 
+<div class="row">
+  <div class="col-sm-6">
+    <div style="color: blue">
+      <strong>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+             {{message}}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </strong>
+    </div>
+  </div>
+</div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          {{message}}
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    <div class="row">
+      <div class = "col-sm-6">
+        <h2>Log In</h2>
+          <form action="/login" method="POST">
+            <p>
+              Email <input type="text" name="email">
+            </p>
+          
+            <p>
+              Password <input type="password" name="password">
+            </p>
+          
+            <p>
+              <input type="submit">
+            </p>
+          </form>
+      </div>
 
-
-  <div class="row">
-    <div class = "column">
+    <div class = "col-sm-6">
       <h2>Create an Account</h2>
         <form action="/create_new_user" method="POST">
           <p>
@@ -45,24 +69,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class = "column">
-      <h2>Log In</h2>
-        <form action="/login" method="POST">
-          <p>
-            Email <input type="text" name="email">
-          </p>
-        
-          <p>
-            Password <input type="password" name="password">
-          </p>
-        
-          <p>
-            <input type="submit">
-          </p>
-        </form>
-    </div>
-  </div>
+
 
   <div class="row">
     <div class = "column">

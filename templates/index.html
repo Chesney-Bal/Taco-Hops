@@ -3,7 +3,19 @@
 {% block title %}Verify Age{% endblock %}
 
 {% block body %}
+{% include 'navBar.html' %}
   <div class="container">
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #697d89;">
+      <a class="navbar-brand" href="#">TacoHop  </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        </div>
+    </nav> -->
 
     <div class="row">
       <div class="col-sm-3">
@@ -41,15 +53,18 @@
       <div class="col-sm-8">
       </div>
       <div class="col-sm-4">
-
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              {% for message in messages %}
-                {{message}}
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-
+        <!-- <div style="color: blue"> -->
+          <div class="alert">
+          <strong>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  {{message}}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </strong>
+        </div>
       </div>
     </div>
   </div>

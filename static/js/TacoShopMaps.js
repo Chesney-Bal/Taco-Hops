@@ -16,16 +16,11 @@ const map = new mapboxgl.Map({
   zoom: 12 // starting zoom  
 });
 
-const center = new mapboxgl.Marker({
-  color: '#FFD700',
-}) .setLngLat([center_long, center_lat])
-.setPopup(new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: true,
-}).setHTML(center_brewery_name))
-.addTo(map);
 
+//adds navigation controls to map for user to zoom in or out
 map.addControl(new mapboxgl.NavigationControl());
+
+
 
 
 //pulls name, longitude, latitude from html for use with markers
@@ -52,7 +47,20 @@ for (const tacoshop of tacoshop_marker_list) {
         }).setHTML(tacoshop[0]))
         .addTo(map); 
   };   
-//END OF MAP FEATURE//
+
+
+//creates center of map with a marker based on nearby brewery
+const center = new mapboxgl.Marker({
+  color: '#FFD700',
+}) .setLngLat([center_long, center_lat])
+.setPopup(new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: true,
+}).setHTML(center_brewery_name))
+.addTo(map);
+
+
+  //END OF MAP FEATURE//
 
 
 

@@ -44,7 +44,7 @@ def verify_age():
 
     #verifies age and only lets 21 and over get to homepage.html
     if crud.are_you_21(birthDate_object) is True:
-        session['is of age']=True
+        session['of_age']=True
         return redirect('/homepage')
 
     #if not 21- user gets redirected to goodbye page

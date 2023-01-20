@@ -17,15 +17,17 @@
 
   <div class="row" id="location-required-msg">
     <div class="col-4">
-      
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              {{message}}
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-      
+      <div style="color: blue">
+        <strong>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                {{message}}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </strong>
+      </div>
     </div>
   </div>
 
@@ -39,7 +41,7 @@
               type ="text"
               name="location">
             <label class="form-label above" for="search-location">Location</label>
-            <small class="form-text text-muted"> Search by neighborhood/state (North Park, Ca), zip code (92109) or city (San Diego).</small>
+            <small class="form-text text-muted"> Search by neighborhood,state (North Park, Ca), zip code (92109) or city (San Diego).</small>
           </div>
 
           <div class="col-sm-2">
