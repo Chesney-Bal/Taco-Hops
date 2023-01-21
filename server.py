@@ -38,13 +38,14 @@ def verify_age():
 
     birthDate_object=datetime.strptime(birthDate, '%Y-%m-%d').date()
 
-    if not birthDate_object:
-        flash("Please enter a birthdate to proceed.")
+    # ##if no date is entered flash a message
+    # if not birthDate_object:
+    #     flash("Please enter a birthdate to proceed.")
 
 
     #verifies age and only lets 21 and over get to homepage.html
     if crud.are_you_21(birthDate_object) is True:
-        session['of_age']=True
+        
         return redirect('/homepage')
 
     #if not 21- user gets redirected to goodbye page
@@ -55,10 +56,10 @@ def verify_age():
 @app.route('/homepage')
 def homepage():
     """Ensures that age remains in session to block out anyone not of age"""
-    old_enough=session.get('is of age', False)
+    # old_enough=session.get('is of age', False)
 
-    if old_enough is False:
-        return redirect('/goodbye')
+    # if old_enough is False:
+    #     return redirect('/goodbye')
 
     return render_template('homepage.html')
     

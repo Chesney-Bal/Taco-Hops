@@ -1,10 +1,4 @@
-/* body {
-  background-color: #d9dadb;
-  background-image: linear-gradient(
-    rgba(217, 218, 219, 0.8),
-    rgba(108, 122, 137, 1)
-  )
-} */
+
 
 .flex-container {
     display: flex;
@@ -17,15 +11,28 @@
   }
   
 
-.goodbye{
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 0, 0.5),
-    rgba(0, 0, 255, 0.5),
-  ),url("/static/img/tacos\ Photo\ by\ Jeswin\ Thomas\ on\ Unsplash.jpg");
-};
 
-.alert {
-  background-color: red;
-  color: blue;
+
+
+
+.front_img {
+  display: block;
+  height: 90%;
+  background: url("/static/img/tacos\ Photo\ by\ Jeswin\ Thomas\ on\ Unsplash.jpg") no-repeat center center;
+  background-size: contain;
+}
+
+.transparent_text {
+  position: relative;
+  margin: 0 auto; /* Center it */
+}
+
+.transparent_text .content {
+  position: absolute; /* Position the background text */
+  top: 180; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 98.2%; /* Full width */
+  padding: 20px; /* Some padding */
 }
