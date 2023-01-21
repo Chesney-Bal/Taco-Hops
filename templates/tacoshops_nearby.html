@@ -51,7 +51,7 @@
         {% for tacoshop in tacoshops %}
         <div class="col-sm-2">
           <div class="taco_coordinates" data-taco_name="{{tacoshop['name']}}" data-taco_lat="{{tacoshop['coordinates']['latitude']}}" data-taco_long="{{tacoshop['coordinates']['longitude']}}">
-            <div class="card" style="max-width: 15rem;">
+            <div class="card border-secondary mb-3" style="max-width: 15rem;">
               <img class="card-img-top" src="{{tacoshop['image_url']}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{tacoshop['name']}}</h5>

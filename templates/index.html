@@ -53,9 +53,9 @@
       <div class="col-sm-8">
       </div>
       <div class="col-sm-4">
-        <!-- <div style="color: blue"> -->
-          <div class="alert">
-          <strong>
+        <div style="color: blue">
+         <div class="alert">
+           <strong>
             {% with messages = get_flashed_messages() %}
               {% if messages %}
                 {% for message in messages %}
@@ -63,7 +63,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-          </strong>
+           </strong>
         </div>
       </div>
     </div>
