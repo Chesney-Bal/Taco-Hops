@@ -11,7 +11,7 @@
 <div class="container">
   <div class="row">
    
-      <h2> Plan your Taco Hop</h2>
+      <h2> Plan your Taco Hops</h2>
 
   </div>
 
@@ -34,7 +34,7 @@
 
     <form method="GET" action="/brewery_trip_planner/search">
       <div class ="row">
-          <div class="col-sm-10">
+          <div class="col-10">
             <input
               id="search-location"
               class="form-control"
@@ -44,12 +44,32 @@
             <small class="form-text text-muted"> Search by neighborhood,state (North Park, Ca), zip code (92109) or city (San Diego).</small>
           </div>
 
-          <div class="col-sm-2">
+          <div class="col-2">
             <input type="submit" value="Brewery Search" class="btn btn-primary">
           </div>
       </div>
     </form>
 
 
+  <div class="row"> 
+    <h3>Get Taco Hopping in 3 Easy Steps!</h3>
+    <div class="row">
+    <div class="col-4">
+      <p class="text-center">Put in a location!</p>
+      <img src="/static/img/location-ikaia-pal-sqr.jpg" class="img-fluid" alt="aerial view of city street and buildings">
+    </div>
+    <div class="col-4">
+      <p class="text-center">Browse Breweries</p>
+      <img src="/static/img/brewery photo by Elevate sqr.jpg" class="img-fluid" alt="two women laughing and drinking beers">
+    </div>
+    <div class="col-4">
+      <p class="text-center">See what taco shops are nearby</p>
+      <img src="/static/img/tacos los-muertos-crew sqr.jpg" class="img-fluid" alt="hand squeezing lime on tacos">
+    </div>
+  </div>
 </div>
+
+</div>
+
+
 {% endblock %}

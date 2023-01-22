@@ -20,7 +20,23 @@ const map = new mapboxgl.Map({
 //adds navigation controls to map for user to zoom in or out
 map.addControl(new mapboxgl.NavigationControl());
 
+// Add geolocate control to the map.
+//Initialize the Geolocate Control
+const geolocate = new mapboxgl.GeolocateControl({
+  positionOptions: {
+      enableHighAccuracy: true
+  },
+  // When active the map will receive updates to the device's location as it changes.
+  trackUserLocation: true,
+  // Draw an arrow next to the location dot to indicate which direction the device is heading.
+  showUserHeading: true,
+  showUserLocation: true,
+});
 
+//adds geolocation feature on map
+map.addControl(geolocate);
+geolocate.on('geolocate', () => {
+})
 
 
 //pulls name, longitude, latitude from html for use with markers
@@ -99,12 +115,11 @@ for (const tacoshop_fav_button of tacoshop_fav_buttons) {
       .then((response) => response.text()) //returns Success from server.py route
       .then((status) => {
         if (status == "Success") {
-          tacoshop_fav_button.innerHTML = "My Fave"; //updates Favorite button once response received
+          tacoshop_fav_button.innerHTML = "Liked"; //updates Favorite button once response received
           tacoshop_fav_button.disabled = true; //makes it so user can't favorite that brewery right then
         }
         else {
           alert("You've already favorited this tacoshop!")
-          console.log ("Tacoshop already favorited")
         }
       })
   });

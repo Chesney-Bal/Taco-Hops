@@ -6,34 +6,37 @@
 
 
 {% block body %}
-   <div class="container front_img transparent_text">
-      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #697d89;">
-         <a class="navbar-brand" href="#">TacoHop  </a>
-   
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-   
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         </div>
-   
-       </nav>
-
-   <div class="transparent_text content">
-      <h1 style="text-align: center;"> Goodbye!</h1>
-      <h2 style="text-align: center;"> If you got here by accident, </h2>
-      <h2 style="text-align: center;">   use the <a href="/">LINK</a> to return to main page and verify age.</h2>
-      <h3 style="text-align: center;">If you aren't 21 yet, happy taco finding! </h3>
-      <h4 style="text-align: center;"> Hop back for taco and beer pairing experiences when you are 21!</h4>
-      <img src="/static/img/tacos Photo by Jeswin Thomas on Unsplash.jpg" class="img-fluid" alt="...">
-      <caption>Photo by Jeswin Thomas on Unsplash</caption>
-   </div> 
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #697d89;">
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="#">Taco Hops  </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+     <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+    </div>
+  </nav>
 
 
-
-
-
-
+  <div class="goodbye_img">
+   <img src="/static/img/tacos3.jpg" class="img-fluid" alt="image of four tacos" >
+   <div class="content">
+      <p class="text-center fs-3 fw-semibold">Goodbye!<br>
+      If you got here by accident, 
+      use the <a href="/">LINK</a> to return to main page.<br>
+      If you aren't 21 yet, happy taco finding! <br>
+      Come back for taco and beer hops when you are 21!</p>
+      <br>
+      <br>
+      
    </div>
+   <caption>Photo by Jeswin Thomas on Unsplash</caption>
+   </div>
+
+
+
+
+</div>
+
 
 {% endblock %}

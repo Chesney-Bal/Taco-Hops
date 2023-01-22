@@ -4,9 +4,7 @@
 {% block title %}User Profile{% endblock %}
 
 {% block head %}
-<meta charset="utf-8">
 
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
@@ -32,7 +30,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-6">
       <h2><u>Profile Information</u></h2>
         <ul class="user_details">
           <li> <strong> User email: </strong> {{user_email}} </li>
@@ -45,7 +43,7 @@
   </div>
 
   <div class ="row">
-    <div class="col-sm-6">
+    <div class="col-6">
         {% for fav_brewery in fav_breweries %}
           <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
             <div class="card" style="width: 25rem;" id="favorite_breweries">
@@ -68,7 +66,7 @@
         {% endfor %}
     </div>  
 
-    <div class="col-sm-6">
+    <div class="col-6">
       <div class="sticky"> 
         <style> #map { position:sticky;  width: 100%; height: 100%; } </style>
           <div id="map"></div>
