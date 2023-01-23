@@ -47,8 +47,8 @@
         {% for brewery in breweries %}
           <div class="col-2"> 
             <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}" >
-              <div class="card-group">
-                <div class="card h-100 border-secondary mb-3"  style="max-width: 15rem;">
+              <div class="card-group" >
+                <div class="card h-100 border-warning mb-3"  style="max-width: 15rem; border-width:3">
                   <img class="card-img-top" src="{{brewery['image_url']}}" alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title">{{brewery['name']}}</h5>

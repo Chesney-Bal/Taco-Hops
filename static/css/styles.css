@@ -1,6 +1,12 @@
 
+html{
+  position: relative;
+  
+}
 
-
+body {
+  margin-bottom:130;
+}
 
 .goodbye_img {
   position: relative;
@@ -20,4 +26,15 @@
   padding-top:160px;
   padding-bottom: 170px;
   padding-inline: 400px; /* Some padding */
+}
+
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.border_taco {
+  border-color: #a13d2d !important;
 }
