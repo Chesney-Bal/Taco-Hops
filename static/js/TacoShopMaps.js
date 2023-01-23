@@ -75,8 +75,7 @@ const center = new mapboxgl.Marker({
 }).setHTML(center_brewery_name))
 .addTo(map);
 
-
-  //END OF MAP FEATURE//
+//END OF MAP FEATURE//
 
 
 
