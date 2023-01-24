@@ -8,6 +8,25 @@ body {
   margin-bottom:130;
 }
 
+/*CSS for image on index.html*/
+.index_img {
+  position: relative;
+  max-width: max-content; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+
+.index_img .content {
+  position: absolute; /* Position the background text */
+  top: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  padding-top:60px;
+  padding-bottom: 300px;
+  padding-inline: 400px; /* Some padding */
+}
+
+/*CSS for iamge on goodbye.html*/
 .goodbye_img {
   position: relative;
   max-width: max-content; /* Maximum width */
@@ -17,8 +36,8 @@ body {
 .goodbye_img .content {
   position: absolute; /* Position the background text */
   top: 0; /* At the bottom. Use top:0 to append it to the top */
-
-  max-width: auto;
+  bottom:0;
+  
 
   background: rgb(0, 0, 0); /* Fallback color */
   background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
@@ -28,13 +47,15 @@ body {
   padding-inline: 400px; /* Some padding */
 }
 
+/*CSS for image border color on homepage.html*/
+.border_taco {
+  border-color: #a13d2d !important;
+}
 
+/*CSS for footer alignment on pages*/
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 
-.border_taco {
-  border-color: #a13d2d !important;
-}
