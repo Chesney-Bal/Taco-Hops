@@ -14,21 +14,16 @@
     <div class="user_profile_text">
 
       <div class="row mx-3">
-          <h1>TacoHopper Profile</h1>  
+          
+          <div class="col-9"> <h1>TacoHopper's Liked Breweries</h1>
+          </div>
+  
+          <div class="col-3" style="text-align: right;">
+            <p> <strong> TacoHopper: </strong> {{user_email}} </p>
+          </div>  
       </div>
 
-      <div class="row mx-3 ">
-        <div class="col-6" style="text-align: center;">
-          <h3> Likes </h3>
-        </div>
 
-        <div class="col-3">
-        </div>
-
-        <div class="col-3" style="text-align: right;">
-          <p> <strong> TacoHopper: </strong> {{user_email}} </p>
-        </div>
-      </div>
 
       <div class ="row m-3">
         <div class="col-6">
@@ -66,7 +61,9 @@
         {% endfor %}
 
       </div>
-
+      <div>
+        <p class="text-end m-1"><small>Photo by Tamas Pap on Unsplash</small></p>
+      </div> 
     </div>
   </div>
 </div>

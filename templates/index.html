@@ -4,24 +4,26 @@
 
 {% block body %}
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #697d89;">
-        <a class="navbar-brand" href="#">TacoHops</a>
-    </nav>
-
     <div class="index_img">
-      <img src="/static/img/pexels-dương-nhân-2_1.jpg" class="img-fluid" alt="image of four tacos" >
-      
-      <div class="content">
-        <p class="text-center fs-3 fw-semibold">Get Ready for TacoHops!!<br></p>
-        <div class="row">
+      <div class="index_text">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #697d89; ">
+            <a class="navbar-brand" style="margin-left: 100px;" href="#">TacoHops</a>
+        </nav>
+
+        <div class="row m-2 text-center index_header">
+          <h1> Get Ready for</h1>
+          <h1> TacoHops!!</h1>
+        </div>
+
+        <div class="row m-4 ">
             <h2> But First...An AGE-old Question!</h2>
         </div>
-  
-        <div class="row">
+
+        <div class="row m-4">
           <div class="col-7">
             <h3> Are you 21 years old?</h3>
           </div>
-        
+            
           <div class="col-5">
             <label for="DOB">Enter your birthdate:</label>
               <form name="DOB_input" action="/" method="post">
@@ -29,31 +31,34 @@
                 <button type ="submit">I'm of age!</button>
               </form>
           </div>
-
-          <div class="row text-end">
-              <div style="color: #f1f1f1;">
-               <div class="alert">
-                 <strong>
-                  {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                      {% for message in messages %}
-                        {{message}}
-                      {% endfor %}
-                    {% endif %}
-                  {% endwith %}
-                 </strong>
-              </div>
-            </div>
-          </div>
         </div>
 
-            
+        <div class="row m-2 index_bottom_mar">
+          <div class="col-7">
+          </div>
+
+          <div class="col-5" style="color: #f1f1f1;">              
+            <div class="alert">
+              <strong>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      {{message}}
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              </strong>
+            </div>              
+          </div>
+        </div> 
+
+        <div>
+          <p class="text-end m-1"><small>Photo by Dương Nhân on Unsplash</small></p>
+        </div> 
+
       </div>
-      
     </div>
-  <div>
-    <p class="text-end">Photo by Dương Nhân on Unsplash</p>
-  </div> 
+</div>
 {% endblock %}
 
 
