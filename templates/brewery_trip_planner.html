@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% include 'navBar.html' %}
 
-{% block title %}Search By Brewery{% endblock %}
+{% block title %}TacoHopsPlanner{% endblock %}
 
 <link rel="stylesheet" href="/static/css/styles.css">
 
@@ -9,78 +9,86 @@
 
 
 <div class="container">
-  <div class="row">
-   
-      <h2> Plan your Taco Hops</h2>
+  <div class="planner_img">
+    <div class="planner_text">
 
-  </div>
-
-  <div class="row" id="location-required-msg">
-    <div class="col-4">
-      <div style="color: blue">
-        <strong>
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              {% for message in messages %}
-                {{message}}
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-        </strong>
+      <div class="row text-center">
+          <h2> Plan your TacoHops</h2>
       </div>
-    </div>
-  </div>
 
-
-    <form method="GET" action="/brewery_trip_planner/search">
-      <div class ="row">
-          <div class="col-10">
-            <input
-              id="search-location"
-              class="form-control border-info"
-              type ="text"
-              name="location">
-            <label class="form-label above" for="search-location">Location</label>
-            <small class="form-text text-muted"> Search by neighborhood,state (North Park, Ca), zip code (92109) or city (San Diego).</small>
+      <div class="row m-2" id="location-required-msg" ">
+        <div class="col-10">
+        </div>
+        <div class="col-2 " >
+          <div style="color: gold">
+            <strong>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    {{message}}
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </strong>
           </div>
-
-          <div class="col-2">
-            <input type="submit" value="Brewery Search" class="btn btn-primary">
-          </div>
+        </div>
       </div>
-    </form>
 
 
-  <div class="row" style="margin-bottom: 15px"> 
-    <div class="row text-center">
-      <h3>Get Taco Hopping in 3 Easy Steps!</h3>
-    </div>
+      <form method="GET" action="/brewery_trip_planner/search">
+        <div class ="row m-1">
+            <div class="col-10 vertical-align: bottom">
+              <input
+                id="search-location"
+                class="form-control border-info"
+                type ="text"
+                name="location">
+                <label class="form-label above" for="search-location"><strong>Location</strong></label>
+                <small class="form-text " style="color: white"> Search by neighborhood, state (North Park, Ca), zip code (92109) or city (Tijuana).</small>
+            </div>
+            
+            <div class="col-2 ">
+              <input type="submit" value="Brewery Search" class="btn btn-primary">
+            </div>
+        </div>
+      </form>
+
+
     
-    <div class="row  justify-content-around " >
-      <div class="col-3">
-        <p class="fs-5 fw-semibold text-center">Put in a location</p>
+      <div class="row text-center">
+        <h3>Get TacoHopping in 3 Easy Steps!</h3>
       </div>
-      <div class="col-3">
-        <p class="fs-5 fw-semibold text-center">Browse breweries</p>
+    
+      <div class="row  justify-content-around " >
+        <div class="col-3">
+          <p class="fs-5 fw-semibold text-center">Put in a location</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-5 fw-semibold text-center">Browse breweries</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-5 fw-semibold text-center">See what taco shops are nearby</p>
+        </div>
       </div>
-      <div class="col-3">
-        <p class="fs-5 fw-semibold text-center">See what taco shops are nearby</p>
-      </div>
-    </div>
 
-    <div class="row  justify-content-around" >
-      <div class="col-3">
-        <img src="/static/img/location-ikaia-pal-sqr.jpg" class="img-fluid border  border-5 border-info" alt="aerial view of city street and buildings" > 
+      <div class="row  justify-content-around " >
+        <div class="col-3">
+          <img src="/static/img/location-ikaia-pal-sqr.jpg" class="img-fluid border  border-5 border-info" alt="aerial view of city street and buildings" > 
+        </div>
+        <div class="col-3">
+          <img src="/static/img/brewery photo by Elevate sqr.jpg" class="img-fluid border border-5 border-warning " alt="two women laughing and drinking beers">
+        </div>
+        <div class="col-3">
+          <img src="/static/img/tacos los-muertos-crew sqr.jpg"  class="img-fluid border border-5 border_taco"  alt="hand squeezing lime on tacos">
+        </div>
       </div>
-      <div class="col-3">
-        <img src="/static/img/brewery photo by Elevate sqr.jpg" class="img-fluid border border-5 border-warning " alt="two women laughing and drinking beers">
-      </div>
-      <div class="col-3">
-        <img src="/static/img/tacos los-muertos-crew sqr.jpg"  class="img-fluid border border-5 border_taco"  alt="hand squeezing lime on tacos">
-      </div>
-    </div>
-</div>
 
+      <div class="row">
+
+      </div>
+  
+    </div>
+  </div>
 </div>
 
 
