@@ -5,80 +5,82 @@
 {% block title %}TacoHops Homepage{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
   <div class="homepage_img">
     <div class="homepage_text">
 
- 
-    <div class="row text-center">
-        <h1>Welcome to TacoHops!</h1>
-    </div>
-
-    <div class="row text-center">
-        <h5>Create a new user account or log-in to your existing account. </h5>
-    </div>
-
-    <div class="row text-center">
-      <div style="color: yellow">
-        <strong>
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              {% for message in messages %}
-              {{message}}
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-        </strong>
-      </div>
-    </div>
-
-    <div class="row mx-5">
-      <div class = "col-6">
-        <h2>Log In</h2>
-          <form action="/login" method="POST">
-            <p>
-              Email <input type="text" name="email">
-            </p>
-          
-            <p>
-              Password <input type="password" name="password">
-            </p>
-          
-            <p>
-              <input type="submit">
-            </p>
-          </form>
+      <div class="row text-center">
+          <h1>Welcome to TacoHops!</h1>
       </div>
 
-      <div class = "col-6">
-        <h2>Create an Account</h2>
-          <form action="/create_new_user" method="POST">
-            <p>
-              Email <input type="text" name="email">
-            </p>
-
-            <p>
-              Password <input type="password" name="password">
-            </p>
-
-            <p>
-              <input type="submit">
-            </p>
-          </form>
+      <div class="row text-center">
+          <h5>Create a new user account or log-in to your existing account. </h5>
       </div>
-    </div>
 
-    <div class="row">
-      <div class = "column" style="text-align: center;">
-        <br>
-        <br>
-        <h2 style="text-align: center;">Don't want to log in?</h2>          
-            <p style="text-align: center;"> You can search by brewery without creating an account:</p>
-            <p style="text-align: center;"><a href="/brewery_trip_planner">Search by Brewery</a></p> 
+      <div class="row text-center">
+        <div style="color: yellow">
+          <strong>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </strong>
+        </div>
       </div>
+
+      <div class="row mx-5">
+        <div class = "col-6">
+          <h2>Log In</h2>
+            <form action="/login" method="POST">
+              <p>
+                Email <input type="text" name="email">
+              </p>
+            
+              <p>
+                Password <input type="password" name="password">
+              </p>
+            
+              <p>
+                <input type="submit">
+              </p>
+            </form>
+        </div>
+
+        <div class = "col-6">
+          <h2>Create an Account</h2>
+            <form action="/create_new_user" method="POST">
+              <p>
+                Email <input type="text" name="email">
+              </p>
+
+              <p>
+                Password <input type="password" name="password">
+              </p>
+
+              <p>
+                <input type="submit">
+              </p>
+            </form>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class = "column" style="text-align: center;">
+          <br>
+          <br>
+          <h2 style="text-align: center;">Don't want to log in?</h2>          
+              <p style="text-align: center;"> You can search by brewery without creating an account:</p>
+              <p style="text-align: center;"><a href="/brewery_trip_planner">Search by Brewery</a></p> 
+
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
 </div>
 {% endblock %}
 

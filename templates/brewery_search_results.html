@@ -7,64 +7,70 @@
   {% block head %}
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-
-
   {% endblock %}
 
-  {% block body %}
-   <div class ="container">
+{% block body %}
+  <div class ="container-fluid">
     <div class="brewery_results_img">
       <div class="brewery_results_text">
 
-    <div class="row text-center">
-        <div class="col-10">      
-          <h1>Breweries near {{location}}:</h1>
+        <div class="row text-center">
+            <div class="col-10">      
+              <h1>Breweries near {{location}}:</h1>
+            </div>
+
+            <div class="col-2">
+              <p>Search powered by  <img id="yelp logo" src="/static/img/yelp_logo 49 x 19.png" alt="yelp logo"></p>
+            </div>
         </div>
 
-        <div class="col-2">
-          <p>Search powered by  <img id="yelp logo" src="/static/img/yelp_logo 49 x 19.png" alt="yelp logo"></p>
-        </div>
-    </div>
-
-    <div class = "row m-1">
-      <div class="col-6">
-        <div class="map"> 
-          <style> #map {width:600px; height: 500px; border: 5px solid; margin-bottom:15px; color:black; border-color:gold;} </style>
-            <div id="map"></div>
-            <div id="map_center" data-long="{{center[0]}}" data-lat="{{center[1]}}"></div>
-        </div>
-      </div>
-
-        {% for brewery in breweries %}
-          <div class="col-2"> 
-            <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}" >
-              <div class="card-group" >
-                <div class="card mb-3"  style="max-width: 15rem; border-width:5; border-color:gold;">
-                  <img class="card-img-top" src="{{brewery['image_url']}}" alt="Card image cap">
-                    <div class="card-body" style="color:black">
-                      <h5 class="card-title">{{brewery['name']}}</h5>
-                        <p class="card-text"><a href="{{brewery['url']}}" target="_blank">Yelp Page</a><p>{{brewery['address']}}</p>
-                          <p> 
-                            {% if session.get('user_email') %}
-                              <button class="btn btn-primary btn-sm" id="fav_brewery_btn" data-brewery_id="{{brewery['id']}}" data-brewery_name="{{brewery['name']}}" data-brewery_address="{{brewery['address']}}" data-brewery_long="{{brewery['coordinates']['longitude']}}" data-brewery_lat="{{brewery['coordinates']['latitude']}}" data-brewery_image_url="{{brewery['image_url']}}" data-brewery_url="{{brewery['url']}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                                </svg>
-                              </button>
-                            {% endif %}  
-                            <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" class="btn btn-secondary btn-sm">Taco Shops</a>                    
-                          </p>
-                        </p>
-                    </div>
-                </div>
-              </div>
-            </div> 
+        <div class = "row m-1 map_and_cards">
+          <div class="col-6">
+            <div class="map"> 
+              <style> #map {width:600px; height: 500px; border: 5px solid; margin-bottom:15px; color:black; border-color:gold;} </style>
+                <div id="map"></div>
+                <div id="map_center" data-long="{{center[0]}}" data-lat="{{center[1]}}"></div>
+            </div>
           </div>
-        {% endfor %}
-      
+
+            {% for brewery in breweries %}
+              <div class="col-2"> 
+                <div class="coordinates" data-name="{{brewery['name']}}" data-lat="{{brewery['coordinates']['latitude']}}" data-long="{{brewery['coordinates']['longitude']}}" >
+                  <div class="card-group" >
+                    <div class="card mb-3"  style="max-width: 15rem; border-width:5; border-color:gold;">
+                      <img class="card-img-top" src="{{brewery['image_url']}}" alt="Card image cap">
+                        <div class="card-body" style="color:black">
+                          <h5 class="card-title">{{brewery['name']}}</h5>
+                            <p class="card-text"><a href="{{brewery['url']}}" target="_blank">Yelp Page</a><p>{{brewery['address']}}</p>
+                              <p> 
+                                {% if session.get('user_email') %}
+                                  <button class="btn btn-primary btn-sm" 
+                                    id="fav_brewery_btn" 
+                                    data-brewery_id="{{brewery['id']}}" 
+                                    data-brewery_name="{{brewery['name']}}" 
+                                    data-brewery_address="{{brewery['address']}}" 
+                                    data-brewery_long="{{brewery['coordinates']['longitude']}}" 
+                                    data-brewery_lat="{{brewery['coordinates']['latitude']}}" 
+                                    data-brewery_image_url="{{brewery['image_url']}}" 
+                                    data-brewery_url="{{brewery['url']}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                    </svg>
+                                  </button>
+                                {% endif %}  
+                                <a href="/taco?lat={{brewery['coordinates']['latitude']}}&long={{brewery['coordinates']['longitude']}}&name={{brewery['name']}}" target="_blank" method="post" class="btn btn-secondary btn-sm">Taco Shops</a>                    
+                              </p>
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            {% endfor %}
+          
+        </div>
       </div>
     </div>
-   </div>
   </div> 
 {% endblock %}
 

@@ -4,74 +4,71 @@
 {% block title %}TacoHopper Profile{% endblock %}
 
 {% block head %}
-
-
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-
-
 {% endblock %}
 
 {% block body %}
-<div class ="container"> 
+<div class ="container-fluid"> 
   <div class="user_profile_img">
     <div class="user_profile_text">
 
-  <div class="row mx-3">
-      <h1>TacoHopper Profile</h1>  
-  </div>
-
-  <div class="row mx-3 ">
-    <div class="col-6" style="text-align: center;">
-      <h3> Breweries Liked </h3>
-    </div>
-
-    <div class="col-3">
-    </div>
-
-    <div class="col-3" style="text-align: right;">
-      <p> <strong> TacoHopper: </strong> {{user_email}} </p>
-    </div>
-  </div>
-
-  <div class ="row m-3">
-    <div class="col-6">
-      <div class="map"> 
-        <style> #map {width: 600px; height: 500px; border: 5px solid; margin-bottom:15px; color: black; border-color:gold; } </style>
-          <div id="map"></div>
-          <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
+      <div class="row mx-3">
+          <h1>TacoHopper Profile</h1>  
       </div>
-    </div>
 
-    {% for fav_brewery in fav_breweries %}
-      <div class="col-3">
-        <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
-          <div class="card-group" > 
-            <div class="card mb-3" style="max-width: 15rem; border-width:5; border-color: gold;" id="favorite_breweries">
-              <img class="card-img-top" src="{{fav_brewery['brewery_image_url']}}" alt="Card image cap">
-                <div class="card-body" style="color:black">
-                  <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
-                    <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p>
-                      <p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
-                      <h6>Favorited Taco Shop(s):</h6>                
-                        {% for fav_tacoshop in fav_tacoshops %}
-                          {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
-                            <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
-                              <p id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</p>
-                            </ul>
-                          {% endif %}
-                        {% endfor %}
-                    <p> <a href="/taco?lat={{fav_brewery['brewery_lat']}}&long={{fav_brewery['brewery_long']}}&name={{fav_brewery['brewery_name']}}" target="_blank" method="post" class="btn btn-primary btn-sm">More nearby taco shops!</a>
-                </div>
-            </div>
+      <div class="row mx-3 ">
+        <div class="col-6" style="text-align: center;">
+          <h3> Likes </h3>
+        </div>
+
+        <div class="col-3">
+        </div>
+
+        <div class="col-3" style="text-align: right;">
+          <p> <strong> TacoHopper: </strong> {{user_email}} </p>
+        </div>
+      </div>
+
+      <div class ="row m-3">
+        <div class="col-6">
+          <div class="map"> 
+            <style> #map {width: 600px; height: 500px; border: 5px solid; margin-bottom:15px; color: black; border-color:gold; } </style>
+              <div id="map"></div>
+              <div id="map_center" data-long="-117.1611" data-lat="32.7157"></div>
           </div>
-        </div> 
-      </div>  
-    {% endfor %}
+        </div>
 
+        {% for fav_brewery in fav_breweries %}
+          <div class="col-3">
+            <div class="fav_brewery_info" data-fav_name="{{fav_brewery['brewery_name']}}" data-fav_brewery_long="{{fav_brewery['brewery_long']}}" data-fav_brewery_lat="{{fav_brewery['brewery_lat']}}">
+              <div class="card-group" > 
+                <div class="card mb-3" style="max-width: 15rem; border-width:5; border-color: gold;" id="favorite_breweries">
+                  <img class="card-img-top" src="{{fav_brewery['brewery_image_url']}}" alt="Card image cap">
+                    <div class="card-body" style="color:black">
+                      <h5 class="card-title">{{fav_brewery['brewery_name']}}</h5>
+                        <p class="card-text"><a href="{{fav_brewery['brewery_url']}}" target="_blank">Visit Yelp to Learn More</a></p>
+                          <p id="fav_brewery_address">{{fav_brewery['brewery_address']}}</p>
+                          <h6>Favorited Taco Shop(s):</h6>                
+                            {% for fav_tacoshop in fav_tacoshops %}
+                              {% if fav_tacoshop['nearby_brewery'] == fav_brewery['brewery_name'] %}
+                                <ul><li><strong>{{fav_tacoshop['tacoshop_name']}}</strong></li>
+                                  <p id="fav_tacoshop_address">{{fav_tacoshop['tacoshop_address']}}</p>
+                                </ul>
+                              {% endif %}
+                            {% endfor %}
+                        <p> <a href="/taco?lat={{fav_brewery['brewery_lat']}}&long={{fav_brewery['brewery_long']}}&name={{fav_brewery['brewery_name']}}" target="_blank" method="post" class="btn btn-primary btn-sm">More nearby taco shops!</a>
+                    </div>
+                </div>
+              </div>
+            </div> 
+          </div>  
+        {% endfor %}
+
+      </div>
+
+    </div>
   </div>
-</div>
-</div>
 </div>
 {% endblock %}
 

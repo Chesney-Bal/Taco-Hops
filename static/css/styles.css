@@ -11,7 +11,8 @@ body {
 footer {
   display: flex;
   flex-flow: column wrap;
-  position: absolute;
+  position: relative;
+  
   bottom: 0;
   width: 100%;
 }
@@ -40,8 +41,8 @@ footer {
 /*CSS for image on homepage.html*/
 .homepage_img {
   background-image: url("/static/img/hops\ with\ tasters\ Photo\ by\ Missy\ Fant\ on\ Unsplash.jpg");
-  background-color: rgb(216, 238, 173);
-  height: fit-content;
+  background-color: rgb(56, 40, 10);
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -61,8 +62,8 @@ footer {
 /*CSS for image on brewery_trip_planner.html*/
 .planner_img {
   background-image: url("/static/img/Stacks\ of\ Kegs\ by\ Pea\ 2_1.jpg");
-  background-color: rgb(216, 238, 173);
-  height: fit-content;
+  background-color: rgb(7, 77, 11);
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -77,7 +78,7 @@ footer {
 /*CSS for image on brewery_search_results.html*/
 .brewery_results_img {
   background-image: url("/static/img/hops\ Photo\ by\ Markus\ Spiske\ on\ Unsplash.jpg");
-  background-color: rgb(216, 238, 173);
+  background-color: rgb(7, 77, 11);
   height: fit-content;
   background-position: center;
   background-repeat: no-repeat;
@@ -88,6 +89,7 @@ footer {
 .brewery_results_text {
   color:gold;
 }
+
 
 
 /*CSS for image on taco_search_results.html*/
