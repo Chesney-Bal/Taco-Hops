@@ -7,6 +7,7 @@
 {% block body %}
 <div class="container-fluid">
   <div class="homepage_img">
+    <div class="transparent_box">
     <div class="homepage_text">
 
       <div class="row text-center">
@@ -32,15 +33,15 @@
       </div>
 
       <div class="row mx-5">
-        <div class = "col-6">
+        <div class = "col-6" style="margin-left:35px">
           <h2>Log In</h2>
             <form action="/login" method="POST">
               <p>
-                Email <input type="text" name="email">
+                 <input type="text" name="email" placeholder="  email">
               </p>
             
               <p>
-                Password <input type="password" name="password">
+                 <input type="password" name="password" placeholder="  password">
               </p>
             
               <p>
@@ -49,15 +50,15 @@
             </form>
         </div>
 
-        <div class = "col-6">
+        <div class = "col-5">
           <h2>Create an Account</h2>
             <form action="/create_new_user" method="POST">
               <p>
-                Email <input type="text" name="email">
+                 <input type="text" name="email" placeholder="  email">
               </p>
 
               <p>
-                Password <input type="password" name="password">
+                 <input type="password" name="password" placeholder="  password">
               </p>
 
               <p>
@@ -68,18 +69,9 @@
       </div>
 
 
-      <div class="row">
+      <div class="row" style="margin-top:50px;">
         <div class = "column" style="text-align: center;">
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
+
           <h2 style="text-align: center;">Don't want to log in?</h2>          
               <p style="text-align: center;"> You can search by brewery without creating an account:</p>
               <p style="text-align: center;"><a href="/brewery_trip_planner">Search by Brewery</a></p> 
@@ -87,10 +79,11 @@
         </div>
       </div>
       
-      <div>
+      <div style="margin-top:30px;">
         <p class="text-end m-1"><small>Photo by Missy Fant on Unsplash</small></p>
       </div> 
     </div>
+  </div>
   </div>
 </div>
 {% endblock %}

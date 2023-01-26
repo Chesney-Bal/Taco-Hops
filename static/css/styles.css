@@ -16,9 +16,18 @@ footer {
   width: 100%;
 }
 
+/*CSS for transparent boxes used over background images*/
+.transparent_box{
+  background: rgb(0, 0, 0, 0.3);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position:relative;
+ }
 
  /* PAGE SPECIFIC CSS*/
-/*CSS for image on homepage.html*/
+/*CSS for image on index.html*/
 .index_img {
   background-image: url("/static/img/pexels-dương-nhân-2_1.jpg");
   background-color: rgb(0, 0, 0);
@@ -127,23 +136,22 @@ footer {
 }
 
 
-/*CSS for iamge on goodbye.html*/
-.goodbye_img {
-  position: relative;
-  max-width: max-content; /* Maximum width */
-  margin: 0 auto; /* Center it */
-}
 
-.goodbye_img .content {
-  position: absolute; /* Position the background text */
-  top: 0; /* At the bottom. Use top:0 to append it to the top */
-  bottom:0;
+
+/*CSS for image on goodbye.html*/
+.goodbye_bg_img {
   
-
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  padding-top:160px;
-  padding-bottom: 170px;
-  padding-inline: 400px; /* Some padding */
+  background-image: url("/static/img/tacos3.jpg");
+  background-color: rgb(0, 0, 0);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position:relative;
 }
+
+
+.goodbye_text {
+  color:white;
+}
+
