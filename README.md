@@ -27,22 +27,30 @@ TacoHops is a full stack web application designed for finding breweries and near
 
 ## <a name="use"></a>How to use TacoHops
 **Easy and intuitive to use.**
-1. Enter in a location 
+1. **Verify your age**
+
+![Age Verification page](/static/img/TacoHops_01_index.png)
+
+2. **Create an account or log-in** 
+
+![TacoHops Account Log in page](/static/img/TacoHops_03_LogIn.png)
+
+2. **Enter in a location**
 
 ![TacoHops Trip Planner page](/static/img/TacoHops_04_TripPlanner.png)
 
-2. Browse breweries
+3. **Browse breweries**
 
-![TacoHops Trip Planner page](/static/img/TacoHops_05_BreweryResults.png)
+![TacoHops brewery results page](/static/img/TacoHops_05_BreweryResults.png)
 
-3. Select Taco Shops button on brewery's card to see taco shops near the desired breweries
+4. **Select Taco Shops button on brewery's card to see taco shops near the desired breweries**
 
-![TacoHops Trip Planner page](/static/img/TacoHops_06_TacoShopResults.png)
+![TacoHops Taco shop results page](/static/img/TacoHops_06_TacoShopResults.png)
 
-4. Like breweries and taco shops 
-5. View likes on User Profile page
+5. **Like breweries and taco shops** 
+6. **View likes on User Profile page**
 
-![TacoHops Trip Planner page](/static/img/TacoHops_07_UserProfile.png)
+![TacoHops User profile page](/static/img/TacoHops_07_UserProfile.png)
 
 #### <a name="version"></a>Version 2.0
 Future versions would incorporate distance from a brewery and methods to navigate that distance (walking/cycling, public transit, driving, etc.).
